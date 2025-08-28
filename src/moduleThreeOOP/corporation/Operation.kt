@@ -7,5 +7,6 @@ enum class OperationCodes(val title: String) {
     REMOVE_PRODUCT_CARD(title = "Remove product card"),
     REGISTER_NEW_EMPLOYEE(title = "Register new employee"),
     FIRE_AN_EMPLOYEE(title = "Fire an employee"),
-    SHOW_ALL_EMPLOYEES(title = "Show all employees")
+    SHOW_ALL_EMPLOYEES(title = "Show all employees"),
+    CHANGE_SALARY(title = "Change salary"),
 }
