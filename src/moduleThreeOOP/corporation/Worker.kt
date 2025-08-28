@@ -4,17 +4,19 @@ open class Worker(
     val id: Int,
     val name: String,
     val age: Int = 0,
+    private var salary: Int,
     val position: Position
 ) {
 
-    var salary: Int = 15000
-        set(value) {
-            if (value < salary) {
-                println("The new salary is too small...")
-            } else {
-                field = value
-            }
+    fun setSalary(value: Int) {
+        if (value < salary) {
+            println("The new salary is too small...")
+        } else {
+            salary = value
         }
+    }
+
+    fun getSalary() = salary
 
     open fun work() {
         println("I'm working now...")

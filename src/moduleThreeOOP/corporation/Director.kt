@@ -3,8 +3,9 @@ package moduleThreeOOP.corporation
 class Director(
     id: Int,
     name: String,
-    age: Int
-) : Worker(id = id, name = name, age = age, position = Position.DIRECTOR),
+    age: Int,
+    salary: Int
+) : Worker(id = id, name = name, age = age, salary = salary, position = Position.DIRECTOR),
     Supplier {
     fun takeCoffee(assistant: Assistant) {
         val drinkName = assistant.bringCoffee(count = 1, drinkName = "Cappucino")
