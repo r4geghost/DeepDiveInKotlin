@@ -6,32 +6,19 @@ class ProductCardRepository {
 
     private val fileProductCards = File("product_card.txt")
 
-    fun registerNewItem(productCard: ProductCard) {
-        saveProductCardToFile(productCard)
-    }
+    val cards = loadAllCards()
 
-    private fun saveProductCardToFile(productCard: ProductCard) {
-        fileProductCards.appendText("${productCard.name}%${productCard.brand}%${productCard.price}%")
-        when (productCard) {
-            is FoodCard -> {
-                val caloric = productCard.caloric
-                fileProductCards.appendText("$caloric%")
-            }
+    fun registerNewItem(productCard: ProductCard) = cards.add(productCard)
 
-            is ShoeCard -> {
-                val size = productCard.size
-                fileProductCards.appendText("$size%")
-            }
-
-            is ApplianceCard -> {
-                val wattage = productCard.wattage
-                fileProductCards.appendText("$wattage%")
-            }
+    fun saveChanges() {
+        val content = StringBuilder()
+        for (card in cards) {
+            content.append("${card.name}%${card.brand}%${card.price}%${card.productType}")
         }
-        fileProductCards.appendText("${productCard.productType}\n")
+        fileProductCards.writeText(content.toString())
     }
 
-    fun loadAllCards(): MutableList<ProductCard> {
+    private fun loadAllCards(): MutableList<ProductCard> {
         val cards = mutableListOf<ProductCard>()
         if (!fileProductCards.exists()) fileProductCards.createNewFile()
         val content = fileProductCards.readText().trim()
@@ -66,16 +53,11 @@ class ProductCardRepository {
     }
 
     fun removeProductCard(name: String) {
-        val cards: MutableList<ProductCard> = loadAllCards()
         for (card in cards) {
             if (card.name == name) {
                 cards.remove(card)
                 break
             }
-        }
-        fileProductCards.writeText("")
-        for (card in cards) {
-            saveProductCardToFile(card)
         }
     }
 

@@ -29,7 +29,11 @@ class Accountant(
             val operationIndex = readln().toInt()
             val operationCode = operationCodes[operationIndex]
             when (operationCode) {
-                EXIT -> break
+                EXIT -> {
+                    workersRepository.saveChanges()
+                    productCardRepository.saveChanges()
+                    break
+                }
                 REGISTER_NEW_ITEM -> registerNewItem()
                 SHOW_ALL_ITEMS -> showAllItems()
                 REMOVE_PRODUCT_CARD -> removeProductCard()
@@ -48,7 +52,7 @@ class Accountant(
     }
 
     private fun showAllItems() {
-       productCardRepository.loadAllCards().forEach { it.printInfo() }
+        productCardRepository.cards.forEach { it.printInfo() }
     }
 
     private fun registerNewItem() {
@@ -137,6 +141,6 @@ class Accountant(
     }
 
     private fun showAllEmployees() {
-        workersRepository.loadAllEmployees().forEach { it.printInfo() }
+        workersRepository.workers.forEach { it.printInfo() }
     }
 }
