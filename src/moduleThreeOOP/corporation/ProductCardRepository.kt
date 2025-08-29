@@ -2,7 +2,7 @@ package moduleThreeOOP.corporation
 
 import java.io.File
 
-class ProductCardRepository {
+object ProductCardRepository {
 
     private val fileProductCards = File("product_card.txt")
 

@@ -2,7 +2,8 @@ package moduleThreeOOP.corporation
 
 import java.io.File
 
-class WorkersRepository {
+// паттерн singleton (работает только с пустым конструктором)
+object WorkersRepository {
 
     private val fileWorkers = File("workers.txt")
 
