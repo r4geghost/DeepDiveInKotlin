@@ -2,13 +2,19 @@ package moduleThreeOOP.corporation
 
 import java.io.File
 
+// паттерн singleton (работает только с пустым конструктором)
 object ProductCardRepository {
 
     private val fileProductCards = File("product_card.txt")
 
-    val cards = loadAllCards()
+    // backing field (теневое поле)
+    private val _cards = loadAllCards()
 
-    fun registerNewItem(productCard: ProductCard) = cards.add(productCard)
+    val cards
+        // возвращаем неизменяемую копию коллекции
+        get() = _cards.toList()
+
+    fun registerNewItem(productCard: ProductCard) = _cards.add(productCard)
 
     fun saveChanges() {
         val content = StringBuilder()
@@ -47,7 +53,7 @@ object ProductCardRepository {
                     ShoeCard(name, brand, price, size)
                 }
             }
-            cards.add(productCard)
+            _cards.add(productCard)
         }
         return cards
     }
@@ -55,7 +61,7 @@ object ProductCardRepository {
     fun removeProductCard(name: String) {
         for (card in cards) {
             if (card.name == name) {
-                cards.remove(card)
+                _cards.remove(card)
                 break
             }
         }
