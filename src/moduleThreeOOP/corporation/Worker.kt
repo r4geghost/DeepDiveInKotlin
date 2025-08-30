@@ -33,4 +33,15 @@ abstract class Worker(
                 && this.salary == other.salary
                 && this.position == other.position
     }
+
+    // обязательно переопределять hashcode и equals вместе
+    override fun hashCode(): Int {
+        var result = id
+        // умножение на 31 дает нормальное распределение
+        result = 31 * result + name.hashCode()
+        result = 31 * result + age
+        result = 31 * result + salary
+        result = 31 * result + position.hashCode()
+        return result
+    }
 }
