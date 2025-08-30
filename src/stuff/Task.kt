@@ -57,18 +57,18 @@ fun deserialize(carAsString: String): Car {
 }
 
 
-data class Order(
+data class DataOrder(
     val id: Int,
     val status: String,
     val type: String
 )
 
-fun removeCompletedOrders(orders: List<Order>, typeToRemove: String): List<Order> {
-    val filteredOrders = mutableListOf<Order>()
+fun removeCompletedDataOrders(orders: List<DataOrder>, typeToRemove: String): List<DataOrder> {
+    val filteredDataOrders = mutableListOf<DataOrder>()
     for (order in orders) {
         if (order.status == "completed" && order.type != typeToRemove) {
-            filteredOrders.add(order)
+            filteredDataOrders.add(order)
         }
     }
-    return filteredOrders.toList()
+    return filteredDataOrders.toList()
 }
