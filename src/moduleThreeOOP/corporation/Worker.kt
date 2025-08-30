@@ -1,22 +1,16 @@
 package moduleThreeOOP.corporation
 
-open class Worker(
+abstract class Worker(
     val id: Int,
     val name: String,
     val age: Int = 0,
-    private var salary: Int,
+    val salary: Int,
     val position: Position
 ) {
-
-    fun setSalary(value: Int) {
-        if (value < salary) {
-            println("The new salary is too small...")
-        } else {
-            salary = value
-        }
-    }
-
-    fun getSalary() = salary
+    abstract fun copy(
+        salary: Int = this.salary,
+        age: Int = this.age
+    ) : Worker
 
     open fun work() {
         println("I'm working now...")

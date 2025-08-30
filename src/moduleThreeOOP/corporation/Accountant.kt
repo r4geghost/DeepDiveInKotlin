@@ -19,6 +19,10 @@ class Accountant(
         super.clean()
     }
 
+    override fun copy(salary: Int, age: Int): Accountant {
+        return Accountant(this.id, this.name, age, salary)
+    }
+
     override fun work() {
         val operationCodes = OperationCodes.entries
         while (true) {
@@ -41,6 +45,7 @@ class Accountant(
                 FIRE_AN_EMPLOYEE -> fireEmployee()
                 SHOW_ALL_EMPLOYEES -> showAllEmployees()
                 CHANGE_SALARY -> changeSalary()
+                CHANGE_AGE -> changeAge()
             }
         }
     }
@@ -126,18 +131,26 @@ class Accountant(
         workersRepository.registerNewEmployee(worker)
     }
 
-    fun fireEmployee() {
+    private fun fireEmployee() {
         print("Enter employee's id to fire: ")
         val id = readln().toInt()
         workersRepository.fireEmployee(id)
     }
 
-    fun changeSalary() {
+    private fun changeSalary() {
         print("Enter employee's id to change salary: ")
         val id = readln().toInt()
         print("Enter new salary: ")
         val salary = readln().toInt()
         workersRepository.changeSalary(id, salary)
+    }
+
+    private fun changeAge() {
+        print("Enter employee's id to change age: ")
+        val id = readln().toInt()
+        print("Enter new age: ")
+        val age = readln().toInt()
+        workersRepository.changeAge(id, age)
     }
 
     private fun showAllEmployees() {
