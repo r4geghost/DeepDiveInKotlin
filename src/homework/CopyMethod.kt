@@ -1,7 +1,7 @@
 package homework
 
 // Task.kt
-class Task(
+class TaskForTest(
     val id: Int,
     val title: String,
     val description: String,
@@ -24,31 +24,31 @@ class Task(
         assignedTo: String = this.assignedTo,
         status: String = this.status,
         priority: String = this.priority
-    ): Task {
-        return Task(this.id, title, description, assignedTo, status, priority)
+    ): TaskForTest {
+        return TaskForTest(this.id, title, description, assignedTo, status, priority)
     }
 }
 
 // Employee.kt
 class Employee(val id: Int, val name: String) {
-    private val _tasks = mutableListOf<Task>()
+    private val _taskForTests = mutableListOf<TaskForTest>()
     val tasks
-        get() = _tasks.toList()
+        get() = _taskForTests.toList()
 
-    private val _archivedTasks = mutableListOf<Task>()
+    private val _archivedTaskForTests = mutableListOf<TaskForTest>()
     val archivedTasks
-        get() = _archivedTasks.toList()
+        get() = _archivedTaskForTests.toList()
 
-    fun addTask(task: Task) {
-        _tasks.add(task)
-        println("Добавлена задача: ${task.title} для сотрудника $name.")
+    fun addTask(taskForTest: TaskForTest) {
+        _taskForTests.add(taskForTest)
+        println("Добавлена задача: ${taskForTest.title} для сотрудника $name.")
     }
 
     fun removeTask(taskId: Int) {
-        val task = _tasks.find { it.id == taskId }
+        val task = _taskForTests.find { it.id == taskId }
         if (task != null) {
-            _archivedTasks.add(task)
-            _tasks.remove(task)
+            _archivedTaskForTests.add(task)
+            _taskForTests.remove(task)
             println("Задача ${task.title} удалена.")
         } else {
             println("Задача с ID $taskId не найдена.")
@@ -56,12 +56,12 @@ class Employee(val id: Int, val name: String) {
     }
 
     fun updateTaskStatus(taskId: Int, newStatus: String) {
-        val task = _tasks.find { it.id == taskId }
+        val task = _taskForTests.find { it.id == taskId }
         if (task != null) {
-            _archivedTasks.add(task)
+            _archivedTaskForTests.add(task)
             val newTask = task.copy(status = newStatus)
-            _tasks.remove(task)
-            _tasks.add(newTask)
+            _taskForTests.remove(task)
+            _taskForTests.add(newTask)
             println("Статус задачи ${task.title} изменен на '$newStatus'.")
         } else {
             println("Задача с ID $taskId не найдена.")
@@ -69,12 +69,12 @@ class Employee(val id: Int, val name: String) {
     }
 
     fun changeTaskAssignee(taskId: Int, newAssignee: String) {
-        val task = _tasks.find { it.id == taskId }
+        val task = _taskForTests.find { it.id == taskId }
         if (task != null) {
-            _archivedTasks.add(task)
+            _archivedTaskForTests.add(task)
             val newTask = task.copy(assignedTo = newAssignee)
-            _tasks.remove(task)
-            _tasks.add(newTask)
+            _taskForTests.remove(task)
+            _taskForTests.add(newTask)
             println("Задача ${task.title} переназначена на $newAssignee.")
         } else {
             println("Задача с ID $taskId не найдена.")
@@ -82,12 +82,12 @@ class Employee(val id: Int, val name: String) {
     }
 
     fun updateTaskPriority(taskId: Int, newPriority: String) {
-        val task = _tasks.find { it.id == taskId }
+        val task = _taskForTests.find { it.id == taskId }
         if (task != null) {
-            _archivedTasks.add(task)
+            _archivedTaskForTests.add(task)
             val newTask = task.copy(priority = newPriority)
-            _tasks.remove(task)
-            _tasks.add(newTask)
+            _taskForTests.remove(task)
+            _taskForTests.add(newTask)
             println("Приоритет задачи ${task.title} изменен на '$newPriority'.")
         } else {
             println("Задача с ID $taskId не найдена.")
@@ -95,12 +95,12 @@ class Employee(val id: Int, val name: String) {
     }
 
     fun modifyTaskDetails(taskId: Int, newTitle: String, newDescription: String) {
-        val task = _tasks.find { it.id == taskId }
+        val task = _taskForTests.find { it.id == taskId }
         if (task != null) {
-            _archivedTasks.add(task)
+            _archivedTaskForTests.add(task)
             val newTask = task.copy(description = newDescription, title = newTitle)
-            _tasks.remove(task)
-            _tasks.add(newTask)
+            _taskForTests.remove(task)
+            _taskForTests.add(newTask)
             println("Детали задачи ${task.id} обновлены.")
         } else {
             println("Задача с ID $taskId не найдена.")
@@ -109,12 +109,12 @@ class Employee(val id: Int, val name: String) {
 
     fun printTasks() {
         println("Список задач для сотрудника $name:")
-        _tasks.forEach { it.printTaskInfo() }
+        _taskForTests.forEach { it.printTaskInfo() }
     }
 }
 
 // Project.kt
-class Project(val name: String) {
+class ProjectForTest(val name: String) {
     private val employees = mutableListOf<Employee>()
 
     fun addEmployee(employee: Employee) {
@@ -122,10 +122,10 @@ class Project(val name: String) {
         println("Сотрудник ${employee.name} добавлен в проект '$name'.")
     }
 
-    fun assignTaskToEmployee(employeeId: Int, task: Task) {
+    fun assignTaskToEmployee(employeeId: Int, taskForTest: TaskForTest) {
         val employee = employees.find { it.id == employeeId }
         if (employee != null) {
-            employee.addTask(task)
+            employee.addTask(taskForTest)
         } else {
             println("Сотрудник с ID $employeeId не найден.")
         }
