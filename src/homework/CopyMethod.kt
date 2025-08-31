@@ -1,4 +1,4 @@
-package stuff
+package homework
 
 // Task.kt
 class Task(

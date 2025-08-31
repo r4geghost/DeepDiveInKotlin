@@ -1,4 +1,4 @@
-package stuff
+package homework
 
 // Примерный класс с правильной реализацией equals и hashCode с несколькими полями
 class Customer(val customerId: Int, val name: String, val email: String, val address: String) {

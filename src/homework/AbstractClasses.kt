@@ -1,4 +1,4 @@
-package stuff
+package homework
 
 import kotlin.math.PI
 import kotlin.math.round
