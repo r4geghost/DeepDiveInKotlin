@@ -79,4 +79,24 @@ object WorkersRepository {
             }
         }
     }
+
+    // возвращает null, если нет объекта указанного типа
+    fun findAssistant(): Assistant? {
+        for (worker in _workers) {
+            if (worker is Assistant) {
+                return worker
+            }
+        }
+        return null
+    }
+
+    // возвращает null, если нет объекта указанного типа
+    fun findDirector(): Director? {
+        for (worker in _workers) {
+            if (worker is Director) {
+                return worker
+            }
+        }
+        return null
+    }
 }
