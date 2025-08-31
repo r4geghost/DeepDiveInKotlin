@@ -1,10 +1,10 @@
 package moduleThreeOOP.corporation
 
 abstract class Worker(
-    val id: Int,
-    val name: String,
-    val age: Int = 0,
-    val salary: Int,
+    open val id: Int,
+    open val name: String,
+    open val age: Int = 0,
+    open val salary: Int,
     val position: Position
 ) {
     abstract fun copy(
@@ -18,30 +18,5 @@ abstract class Worker(
 
     fun printInfo() {
         println(this)
-    }
-
-    override fun toString(): String {
-        return "${position.title}(id=$id, name='$name', age=$age, salary=$salary, position=$position)"
-    }
-
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (other !is Worker) return false
-        return this.id == other.id
-                && this.name == other.name
-                && this.age == other.age
-                && this.salary == other.salary
-                && this.position == other.position
-    }
-
-    // обязательно переопределять hashcode и equals вместе
-    override fun hashCode(): Int {
-        var result = id
-        // умножение на 31 дает нормальное распределение
-        result = 31 * result + name.hashCode()
-        result = 31 * result + age
-        result = 31 * result + salary
-        result = 31 * result + position.hashCode()
-        return result
     }
 }

@@ -1,14 +1,8 @@
 package moduleThreeOOP.corporation
 
-class ShoeCard(
-    name: String,
-    brand: String,
-    price: Int,
+data class ShoeCard(
+    override val name: String,
+    override val brand: String,
+    override val price: Int,
     val size: Float
-): ProductCard(name = name, brand = brand, price = price, ProductType.SHOE) {
-
-    override fun printInfo() {
-        super.printInfo()
-        println("Size $size")
-    }
-}
+) : ProductCard(name = name, brand = brand, price = price, ProductType.SHOE)

@@ -19,13 +19,13 @@ object ProductCardRepository {
     fun saveChanges() {
         val content = StringBuilder()
         for (card in cards) {
-            content.append("${card.name}%${card.brand}%${card.price}%${card.productType}")
+            content.append("${card.name}%${card.brand}%${card.price}%${card.productType}\n")
         }
         fileProductCards.writeText(content.toString())
     }
 
-    private fun loadAllCards(): MutableList<ProductCard> {
-        val cards = mutableListOf<ProductCard>()
+    private fun loadAllCards(): MutableSet<ProductCard> {
+        val cards = mutableSetOf<ProductCard>()
         if (!fileProductCards.exists()) fileProductCards.createNewFile()
         val content = fileProductCards.readText().trim()
         if (content.isEmpty()) return cards
@@ -53,7 +53,7 @@ object ProductCardRepository {
                     ShoeCard(name, brand, price, size)
                 }
             }
-            _cards.add(productCard)
+            cards.add(productCard)
         }
         return cards
     }

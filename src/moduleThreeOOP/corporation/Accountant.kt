@@ -2,11 +2,11 @@ package moduleThreeOOP.corporation
 
 import moduleThreeOOP.corporation.OperationCodes.*
 
-class Accountant(
-    id: Int,
-    name: String,
-    age: Int = 0,
-    salary: Int
+data class Accountant(
+    override val id: Int,
+    override val name: String,
+    override val age: Int = 0,
+    override val salary: Int
 ) : Worker(id = id, name = name, age = age, salary = salary, position = Position.ACCOUNTANT),
     Cleaner,
     Supplier {
@@ -75,7 +75,7 @@ class Accountant(
         val productType: ProductType = productTypes[productTypeIndex]
         print("Enter the product name: ")
         val productName = readln()
-        print("Enter the product brand ")
+        print("Enter the product brand: ")
         val productBrand = readln()
         print("Enter the product price: ")
         val productPrice = readln().toInt()

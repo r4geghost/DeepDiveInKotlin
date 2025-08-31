@@ -1,10 +1,10 @@
 package moduleThreeOOP.corporation
 
-class Director(
-    id: Int,
-    name: String,
-    age: Int,
-    salary: Int
+data class Director(
+    override val id: Int,
+    override val name: String,
+    override val age: Int,
+    override val salary: Int
 ) : Worker(id = id, name = name, age = age, salary = salary, position = Position.DIRECTOR),
     Supplier {
 
