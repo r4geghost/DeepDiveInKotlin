@@ -1,176 +1,46 @@
+package homework
+
 // Базовый абстрактный класс для сотрудников
 abstract class TeamMember(
-    val id: Int,
-    val name: String,
-    val role: String
-) {
-    abstract fun copy(id: Int = this.id, name: String = this.name, role: String = this.role): TeamMember
-
-    override fun toString(): String {
-        return "TeamMember(id=$id, name=$name, role=$role)"
-    }
-
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (other !is TeamMember) return false
-        return id == other.id && name == other.name && role == other.role
-    }
-
-    override fun hashCode(): Int {
-        return id.hashCode() + name.hashCode() + role.hashCode()
-    }
-}
+    open val id: Int,
+    open val name: String,
+    open val role: String
+)
 
 // Класс разработчика
-class Developer(
-    id: Int,
-    name: String,
-    role: String,
+data class Developer(
+    override val id: Int,
+    override val name: String,
+    override val role: String,
     val primaryLanguage: String
-) : TeamMember(id, name, role) {
-
-    override fun copy(
-        id: Int,
-        name: String,
-        role: String
-    ): Developer {
-        return Developer(id, name, role, primaryLanguage)
-    }
-
-    fun copy(
-        id: Int = this.id,
-        name: String = this.name,
-        role: String = this.role,
-        primaryLanguage: String = this.primaryLanguage
-    ): Developer {
-        return Developer(id, name, role, primaryLanguage)
-    }
-
-    override fun toString(): String {
-        return "Developer(id=$id, name=$name, role=$role, primaryLanguage=$primaryLanguage)"
-    }
-
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (other !is Developer) return false
-        return id == other.id && name == other.name && role == other.role && primaryLanguage == other.primaryLanguage
-    }
-
-    override fun hashCode(): Int {
-        return id.hashCode() + name.hashCode() + role.hashCode() + primaryLanguage.hashCode()
-    }
-}
+) : TeamMember(id, name, role)
 
 // Класс менеджера проекта
-class ProjectManager(
-    id: Int,
-    name: String,
-    role: String,
+data class ProjectManager(
+    override val id: Int,
+    override val name: String,
+    override val role: String,
     val projectsHandled: Int
-) : TeamMember(id, name, role) {
-
-    override fun copy(
-        id: Int,
-        name: String,
-        role: String
-    ): ProjectManager {
-        return ProjectManager(id, name, role, projectsHandled)
-    }
-
-    fun copy(
-        id: Int = this.id,
-        name: String = this.name,
-        role: String = this.role,
-        projectsHandled: Int = this.projectsHandled
-    ): ProjectManager {
-        return ProjectManager(id, name, role, projectsHandled)
-    }
-
-    override fun toString(): String {
-        return "ProjectManager(id=$id, name=$name, role=$role, projectsHandled=$projectsHandled)"
-    }
-
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (other !is ProjectManager) return false
-        return id == other.id && name == other.name && role == other.role && projectsHandled == other.projectsHandled
-    }
-
-    override fun hashCode(): Int {
-        return id.hashCode() + name.hashCode() + role.hashCode() + projectsHandled.hashCode()
-    }
-}
+) : TeamMember(id, name, role)
 
 // Класс проекта
-class Project(
+data class Project(
     val projectId: Int,
     val projectName: String,
     val client: String,
     val budget: Double,
     val durationMonths: Int
-) {
-    override fun toString(): String {
-        return "Project(projectId=$projectId, projectName=$projectName, client=$client, budget=$budget, durationMonths=$durationMonths)"
-    }
-
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (other !is Project) return false
-        return projectId == other.projectId && projectName == other.projectName &&
-                client == other.client && budget == other.budget && durationMonths == other.durationMonths
-    }
-
-    override fun hashCode(): Int {
-        return projectId.hashCode() + projectName.hashCode() + client.hashCode() + budget.hashCode() + durationMonths.hashCode()
-    }
-
-    fun copy(
-        projectId: Int = this.projectId,
-        projectName: String = this.projectName,
-        client: String = this.client,
-        budget: Double = this.budget,
-        durationMonths: Int = this.durationMonths
-    ): Project {
-        return Project(projectId, projectName, client, budget, durationMonths)
-    }
-}
+)
 
 // Класс задачи
-class Task(
+data class Task(
     val taskId: Int,
     val title: String,
     val description: String,
     val assignee: TeamMember,
     val priority: Int,
     val deadline: String
-) {
-    override fun toString(): String {
-        return "Task(taskId=$taskId, title=$title, description=$description, assignee=$assignee, priority=$priority, deadline=$deadline)"
-    }
-
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (other !is Task) return false
-        return taskId == other.taskId && title == other.title && description == other.description &&
-                assignee == other.assignee && priority == other.priority && deadline == other.deadline
-    }
-
-    override fun hashCode(): Int {
-        return taskId.hashCode() + title.hashCode() + description.hashCode() + assignee.hashCode() + priority.hashCode() + deadline.hashCode()
-    }
-
-    fun copy(
-        taskId: Int = this.taskId,
-        title: String = this.title,
-        description: String = this.description,
-        assignee: TeamMember = this.assignee,
-        priority: Int = this.priority,
-        deadline: String = this.deadline
-    ): Task {
-        return Task(taskId, title, description, assignee, priority, deadline)
-    }
-}
-
+)
 
 // Класс для проверки работы всех методов в классах
 fun simulateWorkflow() {
