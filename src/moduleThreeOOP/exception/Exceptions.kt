@@ -13,6 +13,8 @@ fun main() {
         println("Common error : ${e.message}")
     }
     println("After try/catch")
+
+    processExpressions()
 }
 
 /**
@@ -54,7 +56,13 @@ fun processExpressions() {
     val expressions = listOf("10 + 5", "20 / 0", "abc * 5", "15 ^ 2", "30 / 5")
 
     for (expression in expressions) {
-        val result = MathEvaluator.evaluate(expression) // TODO: Добавить обработку ошибок
-        println("Результат выражения '$expression': $result")
+        try {
+            val result = MathEvaluator.evaluate(expression)
+            println("Результат выражения '$expression': $result")
+        } catch (e: ArithmeticException) {
+            println("Ошибка: Деление на ноль.")
+        } catch (e: Exception) {
+            println("Ошибка: Некорректное выражение.")
+        }
     }
 }
