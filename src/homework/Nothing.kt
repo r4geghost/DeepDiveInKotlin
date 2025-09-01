@@ -10,7 +10,7 @@ object NumberValidator {
      * Возвращает тип Nothing.
      */
     fun terminate(message: String): Nothing {
-        // TODO: Реализуйте метод
+        throw IllegalArgumentException(message)
     }
 
     /**
@@ -19,7 +19,11 @@ object NumberValidator {
      * @return то же число, если данные корректны.
      */
     fun validate(number: Int): Int {
-        // TODO: Реализуйте метод
+        return when {
+            number < 0 -> terminate("Ошибка: Число отрицательное.")
+            number == 0 -> terminate("Ошибка: Число равно нулю.")
+            else -> number
+        }
     }
 }
 
@@ -28,5 +32,10 @@ object NumberValidator {
  * Проверяет число с помощью NumberValidator.validate и выводит результат.
  */
 fun processNumber(number: Int) {
-    // TODO: Реализуйте функцию
+    try {
+        NumberValidator.validate(number)
+        println("Число: $number")
+    } catch (e: IllegalArgumentException) {
+        println(e.message)
+    }
 }
