@@ -3,6 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/DeepDiveInKotlin.iml" filepath="$PROJECT_DIR$/DeepDiveInKotlin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/FunctionalProgramming.iml" filepath="$PROJECT_DIR$/FunctionalProgramming.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/FunctionalProgramming.main.iml" filepath="$PROJECT_DIR$/.idea/modules/FunctionalProgramming.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/FunctionalProgramming.test.iml" filepath="$PROJECT_DIR$/.idea/modules/FunctionalProgramming.test.iml" />
     </modules>
   </component>
 </project>
