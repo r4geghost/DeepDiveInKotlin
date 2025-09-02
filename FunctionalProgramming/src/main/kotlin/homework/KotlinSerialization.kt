@@ -1,6 +1,11 @@
 package homework
 
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
+
 // Класс User, который необходимо сериализовать и десериализовать
+@Serializable
 data class User(
     val id: Int,
     val name: String,
@@ -10,12 +15,10 @@ data class User(
 
 // Реализуйте эту функцию для сериализации объекта User
 fun serializeUser(user: User): String {
-    // Реализуйте сериализацию
-    return ""
+    return Json.encodeToString(user)
 }
 
 // Реализуйте эту функцию для десериализации строки JSON в объект User
 fun deserializeUser(json: String): User {
-    // Реализуйте десериализацию
-    return User(0, "", "", "")
+    return Json.decodeFromString<User>(json)
 }
