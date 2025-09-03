@@ -5,7 +5,7 @@ import java.io.File
 
 object ProductRepository {
 
-    private val file = File("FunctionalProgramming/products.json")
+    private val file = File("FunctionalProgramming/src/main/kotlin/products/products.json")
 
     private val _products = loadProducts()
     val products

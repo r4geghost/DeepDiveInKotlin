@@ -5,7 +5,7 @@ import java.io.File
 
 object ProfilesRepository {
 
-    private val file = File("FunctionalProgramming/profiles.json")
+    private val file = File("FunctionalProgramming/src/main/kotlin/profile/profiles.json")
 
     private val _profiles = loadProfiles()
     val profiles
