@@ -1,32 +1,13 @@
 package test
 
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
-import java.io.File
-
 fun main() {
-    val books = File("books.json")
-    writeToFile(books)
-    readFromFile(books).forEach { println(it) }
+    println(sum(5, 10))
 }
 
-private fun writeToFile(file: File) {
-    val books = mutableListOf<Book>()
-    while (true) {
-        print("Enter book's year or 0 to exit: ")
-        val year = readln().toInt()
-        if (year == 0) break
-        print("Enter book's title: ")
-        val title = readln()
-        print("Enter book's author: ")
-        val author = readln()
-        val book = Book(title, author, year)
-        books.add(book)
-    }
-    val booksAsString = Json.encodeToString(books)
-    file.writeText(booksAsString)
-}
-
-private fun readFromFile(file: File): List<Book> {
-    return Json.decodeFromString<List<Book>>(file.readText().trim())
+// правило чистой функции - при одних и тех же параметрах результат одинаковый
+// контекст функции = сфера ответственности, функция не должна взаимодействовать с программой вне контекста
+// если использует - side effect
+// все объекты должны быть неизменяемые
+private fun sum(a: Int, b: Int): Int {
+    return a + b
 }
