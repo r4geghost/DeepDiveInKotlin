@@ -16,7 +16,18 @@ fun main() {
 
     filteredProfiles = filter(filteredProfiles) { it.age < 30 }
 
-    filteredProfiles.forEach { println(it) }
+    val transformed = transform(filteredProfiles) { it.copy(age = it.age + 1) }
+
+    transformed.forEach { println(it) }
+}
+
+// generic функция
+private fun <R> transform(profiles: List<Person>, operation: (Person) -> R): List<R> {
+    val result = mutableListOf<R>()
+    for (person in profiles) {
+        result.add(operation(person))
+    }
+    return result
 }
 
 // синтаксис функций = "(тип на вход) -> тип на выход"
