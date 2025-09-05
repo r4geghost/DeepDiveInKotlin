@@ -1,13 +1,14 @@
 package test
 
 fun main() {
-    println(sum(5, 10))
+    val number = readln().toInt()
+    println(isPositiveFunction(number))
+    println(number.isPositive())
 }
 
-// правило чистой функции - при одних и тех же параметрах результат одинаковый
-// контекст функции = сфера ответственности, функция не должна взаимодействовать с программой вне контекста
-// если использует - side effect
-// все объекты должны быть неизменяемые
-private fun sum(a: Int, b: Int): Int {
-    return a + b
-}
+// обычная функция
+private fun isPositiveFunction(number: Int) = number > 0
+
+// функция расширения (extension function)
+// под капотом - обычная функция с параметром
+private fun Int.isPositive() = this > 0
