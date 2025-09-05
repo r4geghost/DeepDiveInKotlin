@@ -1,5 +1,8 @@
 package profile
 
+import extentions.filter
+import extentions.transform
+
 fun main() {
     val profiles = ProfilesRepository.profiles
         .filter { it.age > 25 }
@@ -26,25 +29,4 @@ fun main() {
 //    val transformed = transform(filteredProfiles) { it.copy(age = it.age + 1) }
 //
 //    transformed.forEach { println(it) }
-}
-
-// generic функция
-private fun <R> List<Person>.transform(operation: (Person) -> R): List<R> {
-    val result = mutableListOf<R>()
-    for (person in this) {
-        result.add(operation(person))
-    }
-    return result
-}
-
-// синтаксис функций = "(тип на вход) -> тип на выход"
-// функция высшего порядка = принимает другие функции в качестве параметра или возвращать их
-private fun List<Person>.filter(isSuitable: (Person) -> Boolean): List<Person> {
-    val result = mutableListOf<Person>()
-    for (profile in this) {
-        if (isSuitable(profile)) {
-            result.add(profile)
-        }
-    }
-    return result
 }
