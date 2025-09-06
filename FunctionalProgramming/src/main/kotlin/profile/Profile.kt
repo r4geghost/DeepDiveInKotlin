@@ -1,8 +1,9 @@
 package profile
 
 import extentions.filter
-import extentions.transform
 import extentions.myForEach
+import extentions.myLet
+import extentions.transform
 
 fun main() {
     ProfilesRepository.profiles
@@ -31,4 +32,12 @@ fun main() {
 //    val transformed = transform(filteredProfiles) { it.copy(age = it.age + 1) }
 //
 //    transformed.forEach { println(it) }
+    showEmail()
+}
+
+private fun showEmail() {
+    ProfilesRepository.profiles
+        .find { it.id == readln().toInt() }
+        ?.myLet { println(it.email) }
+        ?: println("Пользователь не найден")
 }

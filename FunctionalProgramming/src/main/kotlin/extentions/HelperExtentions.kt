@@ -27,3 +27,5 @@ inline fun <T> List<T>.myForEach(action: (T) -> Unit) {
         action(item)
     }
 }
+
+inline fun <T, R> T.myLet(operation: (T) -> R): R = operation(this)
