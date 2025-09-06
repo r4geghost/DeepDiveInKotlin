@@ -2,16 +2,18 @@ package profile
 
 import extentions.filter
 import extentions.transform
+import extentions.myForEach
 
 fun main() {
-    val profiles = ProfilesRepository.profiles
+    ProfilesRepository.profiles
         .filter { it.age > 25 }
         .filter { it.gender == Gender.MALE }
         .filter { it.firstName.startsWith("A") }
         .filter { it.age < 30 }
+        .toSet()
         .transform { it.copy(age = it.age + 1) }
-
-    profiles.forEach { println(it) }
+        .sortedByDescending { it.age }
+        .myForEach { println(it) }
 
     // создаем функцию и записываем в переменную
     // если лямбда-выражение принимает один параметр, то компилятор даст ему имя "it" и его можно использовать

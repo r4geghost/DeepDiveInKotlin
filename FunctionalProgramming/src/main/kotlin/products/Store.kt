@@ -1,10 +1,10 @@
 package products
 
-fun main() {
-    val products = ProductRepository.products
-        .filter { it.productCategory == ProductCategory.CLOTHING }
-        .map { it.copy(productPrice = it.productPrice * 2) }
-        .map { "${it.id} - ${it.productName} - ${it.productPrice}" }
+import extentions.myForEach
 
-    products.forEach { println(it) }
+fun main() {
+    ProductRepository.products
+        .filter { it.productCategory == ProductCategory.CLOTHING }
+        .map { "${it.id} - ${it.productName} - ${it.productPrice * 2}" }
+        .myForEach { println(it) }
 }
