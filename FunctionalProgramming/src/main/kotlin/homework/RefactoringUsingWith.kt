@@ -30,30 +30,29 @@ fun formatText(title: String, body: List<String>, footer: String): String {
     val newHeader = "=== Новый заголовок ==="
     val maxTextLength = 500
 
-    val builder = StringBuilder()
+    return with(StringBuilder()) {
+        append("=== $title ===\n")
+        body.forEach { paragraph -> append("$paragraph\n") }
 
-    builder.append("=== $title ===\n")
-    body.forEach { paragraph -> builder.append("$paragraph\n") }
-    builder.append("--- $footer ---\n")
+        append("--- $footer ---\n")
+        insert(0, "\n$oldHeader\n")
 
-    builder.insert(0, "\n$oldHeader\n")
-    builder.append("\n=== Конец текста ===")
+        append("\n=== Конец текста ===")
 
-    val debugIndex = builder.indexOf(debugKeyword)
-    if (debugIndex != -1) {
-        builder.delete(debugIndex, debugIndex + debugKeyword.length)
+        indexOf(debugKeyword).takeIf { it != -1 }?.let {
+            delete(it, it + debugKeyword.length)
+        }
+
+        indexOf(oldHeader).takeIf { it != -1 }?.let {
+            replace(it, it + oldHeader.length, newHeader)
+        }
+
+        length.takeIf { it > maxTextLength }?.let {
+            setLength(maxTextLength)
+        }
+
+        toString()
     }
-
-    val oldHeaderIndex = builder.indexOf(oldHeader)
-    if (oldHeaderIndex != -1) {
-        builder.replace(oldHeaderIndex, oldHeaderIndex + oldHeader.length, newHeader)
-    }
-
-    if (builder.length > maxTextLength) {
-        builder.setLength(maxTextLength)
-    }
-
-    return builder.toString()
 }
 
 fun main() {

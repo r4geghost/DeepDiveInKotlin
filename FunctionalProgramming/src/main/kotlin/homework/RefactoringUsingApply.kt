@@ -57,11 +57,16 @@ fun main() {
         label // Возвращаем объект
     }
 
-    // TODO: Создайте ещё одну переменную labelApply и настройте её с помощью функции apply.
+    // Пример 5: Настройка объекта с помощью функции `apply`
+    val labelApply = JLabel().apply {
+        text = "Hello, World!"
+        font = font.deriveFont(16f)
+        foreground = Color.BLUE
+    }
 
     println(labelDirect)
     println(labelWith)
     println(labelAlso)
     println(labelLet)
-//    println(labelApply)
+    println(labelApply)
 }
