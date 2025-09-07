@@ -30,7 +30,18 @@ inline fun <T> List<T>.myForEach(action: (T) -> Unit) {
 
 inline fun <T, R> T.myLet(operation: (T) -> R): R = operation(this)
 
+// передаваемая функция - для работы с объектом класса (принимает в качестве аргумента - объект класса T)
 inline fun <T> T.myAlso(operation: (T) -> Unit): T {
     operation(this)
     return this
 }
+
+// передаваемая функция - extension на тип T, а значит внутри этой лямбды мы сможем работать, как будто внутри класса T
+// Иначе - работает с методами класса
+inline fun <T> T.myApply(operation: T.() -> Unit): T {
+    operation()
+    return this
+}
+
+// функция with != extension + возвращает результат выполнения лямбды
+inline fun <T, R> myWith(item: T, operation: T.() -> R): R = operation(item)
