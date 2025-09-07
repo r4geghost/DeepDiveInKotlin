@@ -44,7 +44,12 @@ fun main() {
 
     // Реализация с использованием run
     // TODO: Реализуйте обработку объекта user с использованием run
-    val runResult =
+    val runResult = user?.run {
+        if (isActive) {
+            "NewUser $name is active"
+        } else
+            "NewUser $name is not active"
+    }
 
     // Реализация с использованием apply
     // apply здесь не подходит, потому что:
