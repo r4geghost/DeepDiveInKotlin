@@ -16,6 +16,9 @@ package homework
  * @return Новый `Map` с теми же ключами, но преобразованными значениями.
  */
 fun <K, V, R> Map<K, V>.transformValues(transform: (V) -> R): Map<K, R> {
-    // Реализуйте функцию здесь
-    TODO("Реализовать преобразование значений в Map")
+    val result = mutableMapOf<K, R>()
+    for ((key, value) in this) {
+        result[key] = transform(value)
+    }
+    return result
 }
