@@ -1,7 +1,6 @@
 package products
 
 import extentions.myAlso
-import extentions.myForEach
 
 fun main() {
     ProductRepository.products
@@ -17,5 +16,6 @@ fun main() {
         .also { println("Logging: convert to string") }
         .map { "${it.id} - ${it.productName} - ${it.productPrice * 2}" }
         .myAlso { println("Logging: print info") }
-        .myForEach { println(it) }
+        .forEach(::println) // method reference - ссылка на метод
+                            // (функция не создается - в цикле вызвать какую-то функцию и передай ей параметр)
 }

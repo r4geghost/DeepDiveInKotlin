@@ -45,3 +45,5 @@ inline fun <T> T.myApply(operation: T.() -> Unit): T {
 
 // функция with != extension + возвращает результат выполнения лямбды
 inline fun <T, R> myWith(item: T, operation: T.() -> R): R = operation(item)
+
+inline fun <T, R> T.myRun(operation: T.() -> R): R = operation()
