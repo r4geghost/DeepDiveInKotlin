@@ -21,6 +21,11 @@ class SettingsManager(context: Context) : BaseManager(context) {
     fun getSetting(key: String): String? {
         return settings[key]
     }
+
+    companion object {
+        private var instance: SettingsManager? = null
+        fun getInstance(context: Context): SettingsManager = instance ?: SettingsManager(context).also { instance = it }
+    }
 }
 
 open class BaseManager(val context: Context)
