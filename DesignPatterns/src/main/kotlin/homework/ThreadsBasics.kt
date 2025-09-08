@@ -36,11 +36,22 @@ class ThreadRunner {
         val threadInfo = mutableMapOf<String, String>()
 
         // Добавьте в Map имя главного потока и описание его работы
+        threadInfo[Thread.currentThread().name] = "Главный поток, который управляет выполнением"
 
         // Запустите три потока, добавляя в Map имя потока и описание его работы
+        repeat(3) { index ->
+            thread {
+                threadInfo[Thread.currentThread().name] = "Выполняет вычисления ${index + 1}"
+            }.join()
+        }
 
         // Дождитесь завершения потоков, чтобы они успели записать свои имена в Map
 
         return threadInfo
     }
+}
+
+fun main() {
+    val info = ThreadRunner().runThreads()
+    info.map { "${it.key}: ${it.value}" }.forEach { println(it) }
 }
