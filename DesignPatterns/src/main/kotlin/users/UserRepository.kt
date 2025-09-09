@@ -19,6 +19,25 @@ class UserRepository private constructor() {
 
     private fun loadUsers(): MutableList<User> = Json.decodeFromString(file.readText().trim())
 
+    // Singleton финальная правильная реализация с критической секцией (double check)
+    companion object { // аналог static в Java
+        private val lock = Any()
+        private var instance: UserRepository? = null
+
+        fun getInstance(password: String): UserRepository {
+            val correctPassword = File("DesignPatterns/password.txt").readText().trim()
+            if (password != correctPassword) {
+                throw IllegalArgumentException("Wrong password")
+            }
+            // если объект проинициализирован, вернем без захода в критическую секцию - нет очереди
+            instance?.let { return it }
+            // критическая секция
+            synchronized(lock) {
+                return instance ?: UserRepository().also { instance = it }
+            }
+        }
+    }
+
     /*
         // Singleton
 
@@ -66,17 +85,18 @@ class UserRepository private constructor() {
             }
         }
      */
+    /*
+        // Singleton delegate ('by lazy') - создает экземпляр класса при первом обращении
+        companion object {
+            private val instance by lazy { UserRepository() }
 
-    // Singleton delegate ('by lazy') - создает экземпляр класса при первом обращении
-    companion object {
-        private val instance by lazy { UserRepository() }
-
-        fun getInstance(password: String): UserRepository {
-            val correctPassword = File("DesignPatterns/password.txt").readText().trim()
-            if (password != correctPassword) {
-                throw IllegalArgumentException("Wrong password")
+            fun getInstance(password: String): UserRepository {
+                val correctPassword = File("DesignPatterns/password.txt").readText().trim()
+                if (password != correctPassword) {
+                    throw IllegalArgumentException("Wrong password")
+                }
+                return instance
             }
-            return instance
         }
-    }
+     */
 }
