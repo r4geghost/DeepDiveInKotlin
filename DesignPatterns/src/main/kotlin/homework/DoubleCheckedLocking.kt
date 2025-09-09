@@ -12,13 +12,14 @@ package homework
 class DatabaseConnection private constructor() {
 
     companion object {
+        private val lock = Any()
         private var instance: DatabaseConnection? = null
 
         fun getInstance(): DatabaseConnection {
-            if (instance == null) {
-                instance = DatabaseConnection()
+            instance?.let { return it }
+            synchronized(lock) {
+                return instance ?: DatabaseConnection().also { instance = it }
             }
-            return instance!!
         }
     }
 
