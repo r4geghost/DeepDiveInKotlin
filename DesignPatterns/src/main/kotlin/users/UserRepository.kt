@@ -3,8 +3,8 @@ package users
 import kotlinx.serialization.json.Json
 import java.io.File
 
-// class UserRepository private constructor (password: String) - приватный конструктор
-class UserRepository private constructor(password: String) {
+// class UserRepository private constructor () - приватный конструктор
+class UserRepository private constructor() {
 
     // порядок объявления важен! - если есть init, сначала вызвать делать его
     init {
@@ -19,17 +19,64 @@ class UserRepository private constructor(password: String) {
 
     private fun loadUsers(): MutableList<User> = Json.decodeFromString(file.readText().trim())
 
-    // Singleton
-    companion object { // аналог static в Java
-        private var instance: UserRepository? = null
+    /*
+        // Singleton
+
+        companion object { // аналог static в Java
+            private var instance: UserRepository? = null
+
+            fun getInstance(password: String): UserRepository {
+                val correctPassword = File("DesignPatterns/password.txt").readText().trim()
+                if (password != correctPassword) {
+                    throw IllegalArgumentException("Wrong password")
+                } else {
+                    return instance ?: UserRepository().also { instance = it }
+                }
+            }
+        }
+     */
+    /*
+        // Singleton lateinit
+        companion object {
+            private lateinit var instance: UserRepository
+
+            fun getInstance(password: String): UserRepository {
+                val correctPassword = File("DesignPatterns/password.txt").readText().trim()
+                if (password != correctPassword) {
+                    throw IllegalArgumentException("Wrong password")
+                }
+                if (!::instance.isInitialized) {
+                    instance = UserRepository()
+                }
+                return instance
+            }
+        }
+     */
+    /*
+        // Singleton init
+        companion object {
+            private val instance = UserRepository()
+
+            fun getInstance(password: String): UserRepository {
+                val correctPassword = File("DesignPatterns/password.txt").readText().trim()
+                if (password != correctPassword) {
+                    throw IllegalArgumentException("Wrong password")
+                }
+                return instance
+            }
+        }
+     */
+
+    // Singleton delegate ('by lazy') - создает экземпляр класса при первом обращении
+    companion object {
+        private val instance by lazy { UserRepository() }
 
         fun getInstance(password: String): UserRepository {
             val correctPassword = File("DesignPatterns/password.txt").readText().trim()
             if (password != correctPassword) {
                 throw IllegalArgumentException("Wrong password")
-            } else {
-                return instance ?: UserRepository(password).also { instance = it }
             }
+            return instance
         }
     }
 }
