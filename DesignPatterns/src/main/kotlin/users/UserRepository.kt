@@ -2,11 +2,12 @@ package users
 
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
+import observer.Observable
 import observer.Observer
 import java.io.File
 
 // class UserRepository private constructor () - приватный конструктор
-class UserRepository private constructor() {
+class UserRepository private constructor() : Observable<List<User>> {
 
     // порядок объявления важен! - если есть init, сначала вызвать делать его
     init {
@@ -15,23 +16,25 @@ class UserRepository private constructor() {
 
     private val file = File("DesignPatterns/users.json")
 
-    private val observers: MutableList<Observer<List<User>>> = mutableListOf()
+    private val _observers: MutableList<Observer<List<User>>> = mutableListOf()
+    override val observers: List<Observer<List<User>>>
+        get() = _observers.toList()
 
-    fun addObserver(observer: Observer<List<User>>) {
-        observers.add(observer)
-        observer.onChanged(users)
+    override fun registerObserver(observer: Observer<List<User>>) {
+        _observers.add(observer)
+        observer.onChanged(currentValue)
     }
 
-    private fun notifyObservers() {
-        observers.forEach { it.onChanged(users) }
+    override fun unregisterObserver(observer: Observer<List<User>>) {
+        _observers.remove(observer)
     }
 
     private val _users: MutableList<User> = loadUsers()
-    val users
+    override val currentValue: List<User>
         get() = _users.toList()
 
     fun addUser(firstName: String, lastName: String, age: Int) {
-        _users.add(User(users.maxOf { it.id } + 1, firstName, lastName, age))
+        _users.add(User(currentValue.maxOf { it.id } + 1, firstName, lastName, age))
         notifyObservers()
     }
 

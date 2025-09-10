@@ -24,7 +24,7 @@ class Display {
 
         }
         // используем функциональный интерфейс - передаем реализацию через лямбду
-        UserRepository.getInstance("qwerty").addObserver {
+        UserRepository.getInstance("qwerty").registerObserver {
             textArea.text = it.joinToString("\n")
         }
     }
