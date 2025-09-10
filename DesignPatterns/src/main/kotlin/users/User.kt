@@ -9,8 +9,4 @@ data class User(
     @SerialName("first_name") val firstName: String,
     @SerialName("last_name") val lastName: String,
     @SerialName("age") val age: Int,
-    @SerialName("gender") val gender: String,
-    @SerialName("email") val email: String,
-    @SerialName("address") val address: String,
-    @SerialName("phone_number") val phoneNumber: String
 )

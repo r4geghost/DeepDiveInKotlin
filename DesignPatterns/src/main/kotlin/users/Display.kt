@@ -9,21 +9,25 @@ import javax.swing.JTextArea
 
 class Display {
 
+    private val textArea = JTextArea().apply {
+        isEditable = false
+        font = Font(Font.SANS_SERIF, Font.PLAIN, 16)
+        margin = Insets(32, 32, 32, 32)
+    }
+
     fun show() {
-        val textArea = JTextArea().apply {
-            isEditable = true
-            text = UserRepository.getInstance("qwerty")
-                .users
-                .joinToString("\n") // как join в Java
-            font = Font(Font.SANS_SERIF, Font.PLAIN, 16)
-            margin = Insets(32, 32, 32, 32)
-        }
         val scrollPane = JScrollPane(textArea)
         JFrame().apply {
             isVisible = true
             size = Dimension(800, 600)
             isResizable = false
             add(scrollPane)
+
         }
+        UserRepository.getInstance("qwerty").addObserver(this)
+    }
+
+    fun onChanged(users: List<User>) {
+        users.joinToString("\n").let { textArea.text = it }
     }
 }

@@ -1,5 +1,6 @@
 package users
 
+import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import java.io.File
 
@@ -13,9 +14,34 @@ class UserRepository private constructor() {
 
     private val file = File("DesignPatterns/users.json")
 
-    private val _user: MutableList<User> = loadUsers()
+    private val observers: MutableList<Display> = mutableListOf()
+
+    fun addObserver(observer: Display) {
+        observers.add(observer)
+        observer.onChanged(users)
+    }
+
+    private fun notifyObservers() {
+        observers.forEach { it.onChanged(users) }
+    }
+
+    private val _users: MutableList<User> = loadUsers()
     val users
-        get() = _user.toList()
+        get() = _users.toList()
+
+    fun addUser(firstName: String, lastName: String, age: Int) {
+        _users.add(User(users.maxOf { it.id } + 1, firstName, lastName, age))
+        notifyObservers()
+    }
+
+    fun removeUser(userId: Int) {
+        _users.removeIf { it.id == userId }
+        notifyObservers()
+    }
+
+    fun saveChanges() {
+        file.writeText(Json.encodeToString(_users))
+    }
 
     private fun loadUsers(): MutableList<User> = Json.decodeFromString(file.readText().trim())
 

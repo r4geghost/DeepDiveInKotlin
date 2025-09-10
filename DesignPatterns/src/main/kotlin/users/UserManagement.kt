@@ -1,6 +1,6 @@
 package users
 
 fun main() {
-    val display = Display()
-    display.show()
+    Display().show()
+    Administrator().work()
 }
