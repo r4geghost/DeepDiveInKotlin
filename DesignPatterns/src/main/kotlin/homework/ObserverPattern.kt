@@ -28,27 +28,35 @@ package homework
 class UserRepository {
     private val users = mutableListOf<String>()
 
-    // TODO: Добавить список подписчиков (наблюдателей) UserLogger
+    private val observers: MutableList<UserLogger> = mutableListOf()
 
     fun addUser(user: String) {
         users.add(user)
-        // TODO: уведомить подписчиков об изменении списка пользователей
+        notifyObservers()
     }
 
     fun removeUser(user: String) {
         users.remove(user)
-        // TODO: уведомить подписчиков об изменении списка пользователей
+        notifyObservers()
     }
 
-    // TODO: Реализовать метод подписки
+    fun subscribe(observer: UserLogger) {
+        observers.add(observer)
+        observer.onUsersChanged(users)
+    }
 
-    // TODO: Реализовать метод отписки
+    fun unsubscribe(observer: UserLogger) {
+        observers.remove(observer)
+    }
 
-    // TODO: Реализовать метод уведомления подписчиков
+    private fun notifyObservers() {
+        observers.forEach { it.onUsersChanged(users) }
+    }
 }
 
 // Класс наблюдателя, который подписывается на изменения в UserRepository
 class UserLogger {
-    // TODO: Реализовать метод onUsersChanged(), который выводит сообщение в консоль в формате:
-    // [LOG] Пользователи обновлены: <список пользователей>
+    fun onUsersChanged(users: List<String>) {
+        println("[LOG] Пользователи обновлены: $users")
+    }
 }
