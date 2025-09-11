@@ -3,6 +3,7 @@ package users
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import observer.MutableObservable
+import observer.Observable
 import java.io.File
 
 // class UserRepository private constructor () - приватный конструктор
@@ -15,31 +16,37 @@ class UserRepository private constructor() {
 
     private val file = File("DesignPatterns/users.json")
 
-    private val _users: MutableList<User> = loadUsers()
+    // уже не backing field, а просто приватная переменная
+    private val userList: MutableList<User> = loadUsers()
 
-    val users: MutableObservable<List<User>> = MutableObservable(_users.toList())
-    val oldestUser: MutableObservable<User> = MutableObservable(_users.maxBy { it.age })
+    private val _users: MutableObservable<List<User>> = MutableObservable(userList.toList())
+    val users: Observable<List<User>>
+        get() = _users as Observable<List<User>>
+
+    private val _oldestUser: MutableObservable<User> = MutableObservable(userList.maxBy { it.age })
+    val oldestUser: Observable<User>
+        get() = _oldestUser as Observable<User>
 
     fun addUser(firstName: String, lastName: String, age: Int) {
-        val newUser = User(_users.maxOf { it.id } + 1, firstName, lastName, age)
-        _users.add(newUser)
-        users.currentValue = _users.toList()
+        val newUser = User(userList.maxOf { it.id } + 1, firstName, lastName, age)
+        userList.add(newUser)
+        _users.currentValue = userList.toList()
         if (age > oldestUser.currentValue.age) {
-            oldestUser.currentValue = newUser
+            _oldestUser.currentValue = newUser
         }
     }
 
     fun removeUser(userId: Int) {
-        _users.removeIf { it.id == userId }
-        users.currentValue = _users.toList()
-        val newOldestUser = _users.maxBy { it.age }
+        userList.removeIf { it.id == userId }
+        _users.currentValue = userList.toList()
+        val newOldestUser = userList.maxBy { it.age }
         if (newOldestUser != oldestUser.currentValue) {
-            oldestUser.currentValue = newOldestUser
+            _oldestUser.currentValue = newOldestUser
         }
     }
 
     fun saveChanges() {
-        file.writeText(Json.encodeToString(_users))
+        file.writeText(Json.encodeToString(userList))
     }
 
     private fun loadUsers(): MutableList<User> = Json.decodeFromString(file.readText().trim())
