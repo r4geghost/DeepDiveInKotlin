@@ -2,12 +2,11 @@ package users
 
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import observer.Observable
-import observer.Observer
+import observer.MutableObservable
 import java.io.File
 
 // class UserRepository private constructor () - приватный конструктор
-class UserRepository private constructor() : Observable<List<User>> {
+class UserRepository private constructor() {
 
     // порядок объявления важен! - если есть init, сначала вызвать делать его
     init {
@@ -16,31 +15,27 @@ class UserRepository private constructor() : Observable<List<User>> {
 
     private val file = File("DesignPatterns/users.json")
 
-    private val _observers: MutableList<Observer<List<User>>> = mutableListOf()
-    override val observers: List<Observer<List<User>>>
-        get() = _observers.toList()
-
-    override fun registerObserver(observer: Observer<List<User>>) {
-        _observers.add(observer)
-        observer.onChanged(currentValue)
-    }
-
-    override fun unregisterObserver(observer: Observer<List<User>>) {
-        _observers.remove(observer)
-    }
-
     private val _users: MutableList<User> = loadUsers()
-    override val currentValue: List<User>
-        get() = _users.toList()
+
+    val users: MutableObservable<List<User>> = MutableObservable(_users.toList())
+    val oldestUser: MutableObservable<User> = MutableObservable(_users.maxBy { it.age })
 
     fun addUser(firstName: String, lastName: String, age: Int) {
-        _users.add(User(currentValue.maxOf { it.id } + 1, firstName, lastName, age))
-        notifyObservers()
+        val newUser = User(_users.maxOf { it.id } + 1, firstName, lastName, age)
+        _users.add(newUser)
+        users.currentValue = _users.toList()
+        if (age > oldestUser.currentValue.age) {
+            oldestUser.currentValue = newUser
+        }
     }
 
     fun removeUser(userId: Int) {
         _users.removeIf { it.id == userId }
-        notifyObservers()
+        users.currentValue = _users.toList()
+        val newOldestUser = _users.maxBy { it.age }
+        if (newOldestUser != oldestUser.currentValue) {
+            oldestUser.currentValue = newOldestUser
+        }
     }
 
     fun saveChanges() {

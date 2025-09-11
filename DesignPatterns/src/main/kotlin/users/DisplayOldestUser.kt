@@ -7,7 +7,7 @@ import javax.swing.JFrame
 import javax.swing.JScrollPane
 import javax.swing.JTextArea
 
-class Display {
+class DisplayOldestUser {
 
     fun show() {
         val textArea = JTextArea().apply {
@@ -24,8 +24,8 @@ class Display {
 
         }
         // используем функциональный интерфейс - передаем реализацию через лямбду
-        UserRepository.getInstance("qwerty").users.registerObserver {
-            textArea.text = it.joinToString("\n")
+        UserRepository.getInstance("qwerty").oldestUser.registerObserver {
+            textArea.text = "Oldest user: $it"
         }
     }
 }
