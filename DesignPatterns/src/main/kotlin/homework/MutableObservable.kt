@@ -25,65 +25,53 @@ import kotlin.random.Random
 
 // Репозиторий данных
 object DataRepository {
-    var userData: String = "User_Initial"
-    var orderData: Int = 100
-    var priceData: Double = 99.99
+
+    val userData: MutableObservable<String> = MutableObservable("User_Initial")
+    val orderData: MutableObservable<Int> = MutableObservable(100)
+    val priceData: MutableObservable<Double> = MutableObservable(99.99)
 
     // Метод обновления данных
     fun updateData(newUser: String? = null, newOrder: Int? = null, newPrice: Double? = null) {
-        newUser?.let { userData = it }
-        newOrder?.let { orderData = it }
-        newPrice?.let { priceData = round(it * 100) / 100 }
+        newUser?.let { userData.currentValue = it }
+        newOrder?.let { orderData.currentValue = it }
+        newPrice?.let { priceData.currentValue = round(it * 100) / 100 }
     }
 }
 
+fun interface Observer<T> {
+    fun onChanged(value: T)
+}
 
-// Мониторинг данных с периодическим опросом
-class UserMonitor(private val repository: DataRepository) {
-    init {
-        thread {
-            var lastValue = repository.userData
-            while (true) {
-                println("UserMonitor: запрос к DataRepository")
-                if (repository.userData != lastValue) {
-                    println("UserMonitor: Обнаружено изменение данных пользователя: ${repository.userData}")
-                    lastValue = repository.userData
-                }
-                Thread.sleep(1000)
-            }
-        }
+interface Observable<T> {
+    val currentValue: T
+    val observers: List<Observer<T>>
+
+    fun registerObserver(observer: Observer<T>)
+
+    fun unregisterObserver(observer: Observer<T>)
+    fun notifyObservers() {
+        observers.forEach { it.onChanged(currentValue) }
     }
 }
 
-class OrderMonitor(private val repository: DataRepository) {
-    init {
-        thread {
-            var lastValue = repository.orderData
-            while (true) {
-                println("OrderMonitor: запрос к DataRepository")
-                if (repository.orderData != lastValue) {
-                    println("OrderMonitor: Обнаружено изменение данных заказа: ${repository.orderData}")
-                    lastValue = repository.orderData
-                }
-                Thread.sleep(1000)
-            }
+class MutableObservable<T>(initValue: T) : Observable<T> {
+    override var currentValue: T = initValue
+        set(value) {
+            field = value
+            notifyObservers()
         }
-    }
-}
 
-class PriceMonitor(private val repository: DataRepository) {
-    init {
-        thread {
-            var lastValue = repository.priceData
-            while (true) {
-                println("PriceMonitor: запрос к DataRepository")
-                if (repository.priceData != lastValue) {
-                    println("PriceMonitor: Обнаружено изменение цены: ${repository.priceData}")
-                    lastValue = repository.priceData
-                }
-                Thread.sleep(1000)
-            }
-        }
+    private val _observers = mutableListOf<Observer<T>>()
+    override val observers: List<Observer<T>>
+        get() = _observers.toList()
+
+    override fun registerObserver(observer: Observer<T>) {
+        _observers.add(observer)
+        observer.onChanged(currentValue)
+    }
+
+    override fun unregisterObserver(observer: Observer<T>) {
+        _observers.remove(observer)
     }
 }
 
@@ -105,13 +93,22 @@ class DataUpdater(private val repository: DataRepository) {
 }
 
 
-
 fun main() {
     // Запуск обновления данных
     DataUpdater(DataRepository)
 
-    // Запуск мониторинга
-    UserMonitor(DataRepository)
-    OrderMonitor(DataRepository)
-    PriceMonitor(DataRepository)
+    // Подписка на обновления данных пользователя
+    DataRepository.userData.registerObserver { newValue ->
+        println("UserMonitor: Обнаружено изменение данных пользователя: $newValue")
+    }
+
+    // Подписка на обновления данных заказов
+    DataRepository.orderData.registerObserver { newValue ->
+        println("OrderMonitor: Обнаружено изменение данных заказа: $newValue")
+    }
+
+    // Подписка на обновления данных цены
+    DataRepository.priceData.registerObserver { newValue ->
+        println("PriceMonitor: Обнаружено изменение цены: $newValue")
+    }
 }

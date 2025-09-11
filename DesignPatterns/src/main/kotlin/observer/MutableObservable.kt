@@ -14,7 +14,7 @@ class MutableObservable<T>(initValue: T) : Observable<T> {
 
     override fun registerObserver(observer: Observer<T>) {
         _observers.add(observer)
-        notifyObservers()
+        observer.onChanged(currentValue)
     }
 
     override fun unregisterObserver(observer: Observer<T>) {
