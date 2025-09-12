@@ -28,6 +28,7 @@ class UserRepository private constructor() {
         get() = _oldestUser as Observable<User>
 
     fun addUser(firstName: String, lastName: String, age: Int) {
+        Thread.sleep(10_000) // искусственная задержка
         val newUser = User(userList.maxOf { it.id } + 1, firstName, lastName, age)
         userList.add(newUser)
         _users.currentValue = userList.toList()
@@ -37,6 +38,7 @@ class UserRepository private constructor() {
     }
 
     fun removeUser(userId: Int) {
+        Thread.sleep(10_000) // искусственная задержка
         userList.removeIf { it.id == userId }
         _users.currentValue = userList.toList()
         val newOldestUser = userList.maxBy { it.age }
