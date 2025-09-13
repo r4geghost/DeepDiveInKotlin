@@ -19,8 +19,41 @@ package homework
     Создайте объект Product, используя данные методы, установите все параметры и передайте его в переменную product.
  */
 
-fun task() : Product {
-    val product =
+data class Product(
+    val name: String,
+    val price: Double,
+    val manufacturer: String,
+    val warranty: Int
+) {
+    class Builder {
+        private var name: String = "Smartphone"
+        private var price: Double = 999.99
+        private var manufacturer: String = "TechCorp"
+        private var warranty: Int = 24
+
+        fun name(name: String): Builder = this.apply { this.name = name }
+        fun price(price: Double): Builder = this.apply { this.price = price }
+        fun manufacturer(manufacturer: String): Builder = this.apply { this.manufacturer = manufacturer }
+        fun warranty(months: Int): Builder = this.apply { this.warranty = months }
+
+        fun build(): Product {
+            return Product(name, price, manufacturer, warranty)
+        }
+    }
+}
+
+fun task(): Product {
+    val product = Product.Builder()
+        .name("Keyboard")
+        .price(8999.99)
+        .manufacturer("Dark Project")
+        .warranty(12)
+        .build()
 
     return product
+}
+
+fun main() {
+    val product = task()
+    println(product)
 }
