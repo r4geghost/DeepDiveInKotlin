@@ -31,4 +31,34 @@ class NumbersMutableListTest {
         repeat(10) { list.add(it) }
         Assertions.assertEquals(5, list.get(5))
     }
+
+    @ParameterizedTest
+    @MethodSource("mutableListSource")
+    fun `When add 100 element then size is 100`(list: NumbersArrayList) {
+        repeat(100) { list.add(it) }
+        Assertions.assertEquals(100, list.size)
+    }
+
+    @ParameterizedTest
+    @MethodSource("mutableListSource")
+    fun `When get 50th element then result it correct`(list: NumbersArrayList) {
+        repeat(100) { list.add(it) }
+        Assertions.assertEquals(50, list.get(50))
+    }
+
+    @ParameterizedTest
+    @MethodSource("mutableListSource")
+    fun `When element removed then size decreased`(list: NumbersArrayList) {
+        repeat(100) { list.add(it) }
+        list.removeAt(50)
+        Assertions.assertEquals(99, list.size)
+    }
+
+    @ParameterizedTest
+    @MethodSource("mutableListSource")
+    fun `When removed 50th element then next value at this positions`(list: NumbersArrayList) {
+        repeat(100) { list.add(it) }
+        list.removeAt(50)
+        Assertions.assertEquals(51, list.get(50))
+    }
 }
