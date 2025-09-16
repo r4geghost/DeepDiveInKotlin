@@ -20,6 +20,24 @@ class NumbersMutableListTest {
 
     @ParameterizedTest
     @MethodSource("mutableListSource")
+    fun `When element added to first position then it is in first position`(list: NumbersArrayList) {
+        repeat(100) { list.add(it) }
+        list.add(0, 999)
+        Assertions.assertEquals(999, list.get(0))
+        Assertions.assertEquals(101, list.size)
+    }
+
+    @ParameterizedTest
+    @MethodSource("mutableListSource")
+    fun `When element added to last position then it is in last position`(list: NumbersArrayList) {
+        repeat(100) { list.add(it) }
+        list.add(100, 999)
+        Assertions.assertEquals(999, list.get(100))
+        Assertions.assertEquals(101, list.size)
+    }
+
+    @ParameterizedTest
+    @MethodSource("mutableListSource")
     fun `When add 10 element then size is 10`(list: NumbersArrayList) {
         repeat(10) { list.add(it) }
         Assertions.assertEquals(10, list.size)
@@ -60,5 +78,35 @@ class NumbersMutableListTest {
         repeat(100) { list.add(it) }
         list.removeAt(50)
         Assertions.assertEquals(51, list.get(50))
+    }
+
+    @ParameterizedTest
+    @MethodSource("mutableListSource")
+    fun `When removed value 50 element then next value at this positions`(list: NumbersArrayList) {
+        repeat(100) { list.add(it) }
+        list.remove(50)
+        Assertions.assertEquals(51, list.get(50))
+    }
+
+    @ParameterizedTest
+    @MethodSource("mutableListSource")
+    fun `When list cleared then size is 0`(list: NumbersArrayList) {
+        repeat(100) { list.add(it) }
+        list.clear()
+        Assertions.assertEquals(0, list.size)
+    }
+
+    @ParameterizedTest
+    @MethodSource("mutableListSource")
+    fun `When list contains element then true`(list: NumbersArrayList) {
+        repeat(100) { list.add(it) }
+        Assertions.assertTrue(list.contains(99))
+    }
+
+    @ParameterizedTest
+    @MethodSource("mutableListSource")
+    fun `When list doesn't contain element then false`(list: NumbersArrayList) {
+        repeat(100) { list.add(it) }
+        Assertions.assertFalse(list.contains(-1))
     }
 }
