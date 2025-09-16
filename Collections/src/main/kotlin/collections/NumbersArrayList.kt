@@ -2,7 +2,13 @@ package collections
 
 class NumbersArrayList : NumbersMutableList {
 
-    private var numbers = arrayOfNulls<Int>(10)
+    companion object {
+        private const val INITIAL_CAPACITY = 10 // const = не создается get
+        // + значение будет встроено вместо их вызова (не сама переменная, а сразу значение)
+        // + должны быть привязаны к классу
+    }
+
+    private var numbers = arrayOfNulls<Int>(INITIAL_CAPACITY)
 
     override var size: Int = 0
         private set
@@ -20,6 +26,14 @@ class NumbersArrayList : NumbersMutableList {
         }
         numbers[index] = number
         size++
+    }
+
+    override fun plus(number: Int) {
+        add(number)
+    }
+
+    override fun minus(number: Int) {
+        remove(number)
     }
 
     override fun removeAt(index: Int) {
@@ -44,7 +58,7 @@ class NumbersArrayList : NumbersMutableList {
     }
 
     override fun clear() {
-        numbers = arrayOfNulls(10)
+        numbers = arrayOfNulls(INITIAL_CAPACITY)
         size = 0
     }
 

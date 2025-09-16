@@ -23,7 +23,7 @@ class NumbersMutableListTest {
     fun `When element added to first position then it is in first position`(list: NumbersArrayList) {
         repeat(100) { list.add(it) }
         list.add(0, 999)
-        Assertions.assertEquals(999, list.get(0))
+        Assertions.assertEquals(999, list[0])
         Assertions.assertEquals(101, list.size)
     }
 
@@ -32,7 +32,7 @@ class NumbersMutableListTest {
     fun `When element added to last position then it is in last position`(list: NumbersArrayList) {
         repeat(100) { list.add(it) }
         list.add(100, 999)
-        Assertions.assertEquals(999, list.get(100))
+        Assertions.assertEquals(999, list[100])
         Assertions.assertEquals(101, list.size)
     }
 
@@ -47,7 +47,7 @@ class NumbersMutableListTest {
     @MethodSource("mutableListSource")
     fun `When get 5th element then result it correct`(list: NumbersArrayList) {
         repeat(10) { list.add(it) }
-        Assertions.assertEquals(5, list.get(5))
+        Assertions.assertEquals(5, list[5])
     }
 
     @ParameterizedTest
@@ -61,7 +61,7 @@ class NumbersMutableListTest {
     @MethodSource("mutableListSource")
     fun `When get 50th element then result it correct`(list: NumbersArrayList) {
         repeat(100) { list.add(it) }
-        Assertions.assertEquals(50, list.get(50))
+        Assertions.assertEquals(50, list[50])
     }
 
     @ParameterizedTest
@@ -77,7 +77,7 @@ class NumbersMutableListTest {
     fun `When removed 50th element then next value at this positions`(list: NumbersArrayList) {
         repeat(100) { list.add(it) }
         list.removeAt(50)
-        Assertions.assertEquals(51, list.get(50))
+        Assertions.assertEquals(51, list[50])
     }
 
     @ParameterizedTest
@@ -85,7 +85,7 @@ class NumbersMutableListTest {
     fun `When removed value 50 element then next value at this positions`(list: NumbersArrayList) {
         repeat(100) { list.add(it) }
         list.remove(50)
-        Assertions.assertEquals(51, list.get(50))
+        Assertions.assertEquals(51, list[50])
     }
 
     @ParameterizedTest
@@ -108,5 +108,20 @@ class NumbersMutableListTest {
     fun `When list doesn't contain element then false`(list: NumbersArrayList) {
         repeat(100) { list.add(it) }
         Assertions.assertFalse(list.contains(-1))
+    }
+
+    @ParameterizedTest
+    @MethodSource("mutableListSource")
+    fun `When add 10 element using plus operator then size is 10`(list: NumbersArrayList) {
+        repeat(10) { list + it }
+        Assertions.assertEquals(10, list.size)
+    }
+
+    @ParameterizedTest
+    @MethodSource("mutableListSource")
+    fun `When removed 50th element using minus operator then next value at this positions`(list: NumbersArrayList) {
+        repeat(100) { list.add(it) }
+        list - 50
+        Assertions.assertEquals(51, list[50])
     }
 }
