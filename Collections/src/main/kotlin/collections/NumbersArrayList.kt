@@ -20,10 +20,9 @@ class NumbersArrayList : NumbersMutableList {
     }
 
     override fun add(index: Int, number: Int) {
+        checkIndexForAdding(index)
         growIfNeeded()
-        for (i in size downTo index + 1) {
-            numbers[i] = numbers[i - 1]
-        }
+        System.arraycopy(numbers, index, numbers, index + 1, size - index)
         numbers[index] = number
         size++
     }
@@ -37,9 +36,8 @@ class NumbersArrayList : NumbersMutableList {
     }
 
     override fun removeAt(index: Int) {
-        for (i in index until size - 1) {
-            numbers[i] = numbers[i + 1]
-        }
+        checkIndex(index)
+        System.arraycopy(numbers, index + 1, numbers, index, size - index - 1)
         size--
         numbers[size] = null
     }
@@ -54,6 +52,7 @@ class NumbersArrayList : NumbersMutableList {
     }
 
     override fun get(index: Int): Int {
+        checkIndex(index)
         return numbers[index]!! // не финальное решение
     }
 
@@ -74,10 +73,20 @@ class NumbersArrayList : NumbersMutableList {
     private fun growIfNeeded() {
         if (numbers.size == size) {
             val newArray = arrayOfNulls<Int>(size * 2)
-            for (i in numbers.indices) {
-                newArray[i] = numbers[i]
-            }
+            System.arraycopy(numbers, 0, newArray, 0, size) // native - реализация на C++ под капотом
             numbers = newArray
+        }
+    }
+
+    private fun checkIndex(index: Int) {
+        if (index < 0 || index >= size) {
+            throw IndexOutOfBoundsException("Index: $index, size: $size")
+        }
+    }
+
+    private fun checkIndexForAdding(index: Int) {
+        if (index < 0 || index > size) {
+            throw IndexOutOfBoundsException("Index: $index, size: $size")
         }
     }
 }

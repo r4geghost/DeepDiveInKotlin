@@ -1,6 +1,7 @@
 package collections
 
 import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
 
@@ -123,5 +124,47 @@ class NumbersMutableListTest {
         repeat(100) { list.add(it) }
         list - 50
         Assertions.assertEquals(51, list[50])
+    }
+
+    @ParameterizedTest
+    @MethodSource("mutableListSource")
+    fun `When get wrong element index then throw IndexOutOfBoundsException`(list: NumbersArrayList) {
+        repeat(10) { list.add(it) }
+        assertThrows<IndexOutOfBoundsException> { list[10] }
+    }
+
+    @ParameterizedTest
+    @MethodSource("mutableListSource")
+    fun `When get negative element index then throw IndexOutOfBoundsException`(list: NumbersArrayList) {
+        repeat(10) { list.add(it) }
+        assertThrows<IndexOutOfBoundsException> { list[-1] }
+    }
+
+    @ParameterizedTest
+    @MethodSource("mutableListSource")
+    fun `When add invoked with wrong index then throw IndexOutOfBoundsException`(list: NumbersArrayList) {
+        repeat(10) { list.add(it) }
+        assertThrows<IndexOutOfBoundsException> { list.add(11, 1000) }
+    }
+
+    @ParameterizedTest
+    @MethodSource("mutableListSource")
+    fun `When add invoked with negative index then throw IndexOutOfBoundsException`(list: NumbersArrayList) {
+        repeat(10) { list.add(it) }
+        assertThrows<IndexOutOfBoundsException> { list.add(-1, 1000) }
+    }
+
+    @ParameterizedTest
+    @MethodSource("mutableListSource")
+    fun `When remove invoked with wrong index then throw IndexOutOfBoundsException`(list: NumbersArrayList) {
+        repeat(10) { list.add(it) }
+        assertThrows<IndexOutOfBoundsException> { list.removeAt(11) }
+    }
+
+    @ParameterizedTest
+    @MethodSource("mutableListSource")
+    fun `When remove invoked with negative index then throw IndexOutOfBoundsException`(list: NumbersArrayList) {
+        repeat(10) { list.add(it) }
+        assertThrows<IndexOutOfBoundsException> { list.removeAt(-1) }
     }
 }
