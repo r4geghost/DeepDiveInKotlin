@@ -55,19 +55,12 @@ class NumbersHashSet : NumbersMutableSet {
 
     override fun contains(number: Int): Boolean {
         val position = getElementPosition(number, elements.size)
-        var element = elements[position]
-        if (element == null) {
-            return false
-        }
+        var element = elements[position] ?: return false
         while (true) {
-            if (element?.item == number) {
+            if (element.item == number) {
                 return true
             } else {
-                if (element?.next == null) {
-                    return false
-                } else {
-                    element = element.next
-                }
+                element = element.next ?: return false
             }
         }
     }
