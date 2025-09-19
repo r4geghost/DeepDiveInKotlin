@@ -1,10 +1,10 @@
 package collections
 
-interface MyMutableSet<T> {
-    val size: Int
+interface MyMutableSet<T> : MyMutableCollection<T> {
+    override val size: Int
 
-    fun add(element: T): Boolean
-    fun remove(element: T)
-    fun clear()
-    fun contains(element: T): Boolean
+    override fun add(element: T): Boolean
+    override fun remove(element: T)
+    override fun clear()
+    override fun contains(element: T): Boolean
 }

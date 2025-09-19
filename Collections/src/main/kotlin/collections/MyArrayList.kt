@@ -8,22 +8,23 @@ class MyArrayList<T>(initialCapacity: Int = INITIAL_CAPACITY) : MyMutableList<T>
         // + должны быть привязаны к классу
     }
 
-    private var numbers = arrayOfNulls<Any>(INITIAL_CAPACITY)
+    private var elements = arrayOfNulls<Any>(INITIAL_CAPACITY)
 
     override var size: Int = 0
         private set
 
-    override fun add(element: T) {
+    override fun add(element: T): Boolean {
         growIfNeeded()
-        numbers[size] = element
+        elements[size] = element
         size++
+        return true
     }
 
     override fun add(index: Int, element: T) {
         checkIndexForAdding(index)
         growIfNeeded()
-        System.arraycopy(numbers, index, numbers, index + 1, size - index)
-        numbers[index] = element
+        System.arraycopy(elements, index, elements, index + 1, size - index)
+        elements[index] = element
         size++
     }
 
@@ -37,14 +38,14 @@ class MyArrayList<T>(initialCapacity: Int = INITIAL_CAPACITY) : MyMutableList<T>
 
     override fun removeAt(index: Int) {
         checkIndex(index)
-        System.arraycopy(numbers, index + 1, numbers, index, size - index - 1)
+        System.arraycopy(elements, index + 1, elements, index, size - index - 1)
         size--
-        numbers[size] = null
+        elements[size] = null
     }
 
     override fun remove(element: T) {
-        for (i in numbers.indices) {
-            if (numbers[i] == element) {
+        for (i in elements.indices) {
+            if (elements[i] == element) {
                 removeAt(i)
                 return
             }
@@ -53,17 +54,32 @@ class MyArrayList<T>(initialCapacity: Int = INITIAL_CAPACITY) : MyMutableList<T>
 
     override fun get(index: Int): T {
         checkIndex(index)
-        return numbers[index] as T // downcast здесь будет всегда выполняться без ошибки
+        return elements[index] as T // downcast здесь будет всегда выполняться без ошибки
     }
 
     override fun clear() {
-        numbers = arrayOfNulls(INITIAL_CAPACITY)
+        elements = arrayOfNulls(INITIAL_CAPACITY)
         size = 0
     }
 
+    override fun iterator(): Iterator<T> {
+        return object : Iterator<T> {
+
+            private var nextIndex = 0
+
+            override fun hasNext(): Boolean {
+                return nextIndex < size
+            }
+
+            override fun next(): T {
+                return elements[nextIndex++] as T
+            }
+        }
+    }
+
     override fun contains(element: T): Boolean {
-        for (i in numbers.indices) {
-            if (numbers[i] == element) {
+        for (i in elements.indices) {
+            if (elements[i] == element) {
                 return true
             }
         }
@@ -71,10 +87,10 @@ class MyArrayList<T>(initialCapacity: Int = INITIAL_CAPACITY) : MyMutableList<T>
     }
 
     private fun growIfNeeded() {
-        if (numbers.size == size) {
+        if (elements.size == size) {
             val newArray = arrayOfNulls<Any>(size * 2)
-            System.arraycopy(numbers, 0, newArray, 0, size) // native - реализация на C++ под капотом
-            numbers = newArray
+            System.arraycopy(elements, 0, newArray, 0, size) // native - реализация на C++ под капотом
+            elements = newArray
         }
     }
 
