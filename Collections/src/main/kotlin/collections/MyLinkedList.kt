@@ -11,10 +11,13 @@ class MyLinkedList<T> : MyMutableList<T> {
     private var first: Node<T>? = null
     private var last: Node<T>? = null
 
+    private var modCount = 0
+
     override var size: Int = 0
         private set
 
     override fun add(element: T): Boolean {
+        modCount++
         val prevLast = last
         last = Node(prevLast, element)
         if (prevLast == null) {
@@ -27,6 +30,7 @@ class MyLinkedList<T> : MyMutableList<T> {
     }
 
     override fun add(index: Int, element: T) {
+        modCount++
         checkIndexForAdding(index)
         if (index == size) {
             add(element)
@@ -59,12 +63,14 @@ class MyLinkedList<T> : MyMutableList<T> {
     }
 
     override fun removeAt(index: Int) {
+        modCount++
         checkIndex(index)
         val node = getNode(index)
         unlink(node)
     }
 
     override fun remove(element: T) {
+        modCount++
         var node = first
         repeat(size) {
             if (node?.item == element) {
@@ -102,6 +108,7 @@ class MyLinkedList<T> : MyMutableList<T> {
     }
 
     override fun clear() {
+        modCount++
         first = null
         last = null
         size = 0
@@ -110,6 +117,8 @@ class MyLinkedList<T> : MyMutableList<T> {
     override fun iterator(): Iterator<T> {
         return object : Iterator<T> {
 
+            private val currentModCount = modCount
+
             private var nextNode = first
 
             override fun hasNext(): Boolean {
@@ -117,6 +126,7 @@ class MyLinkedList<T> : MyMutableList<T> {
             }
 
             override fun next(): T {
+                if (currentModCount != modCount) throw ConcurrentModificationException()
                 return nextNode?.item!!.also { nextNode = nextNode?.next }
             }
         }

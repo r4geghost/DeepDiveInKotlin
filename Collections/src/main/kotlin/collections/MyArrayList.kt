@@ -8,12 +8,15 @@ class MyArrayList<T>(initialCapacity: Int = INITIAL_CAPACITY) : MyMutableList<T>
         // + должны быть привязаны к классу
     }
 
+    private var modCount = 0
+
     private var elements = arrayOfNulls<Any>(INITIAL_CAPACITY)
 
     override var size: Int = 0
         private set
 
     override fun add(element: T): Boolean {
+        modCount++
         growIfNeeded()
         elements[size] = element
         size++
@@ -21,6 +24,7 @@ class MyArrayList<T>(initialCapacity: Int = INITIAL_CAPACITY) : MyMutableList<T>
     }
 
     override fun add(index: Int, element: T) {
+        modCount++
         checkIndexForAdding(index)
         growIfNeeded()
         System.arraycopy(elements, index, elements, index + 1, size - index)
@@ -37,6 +41,7 @@ class MyArrayList<T>(initialCapacity: Int = INITIAL_CAPACITY) : MyMutableList<T>
     }
 
     override fun removeAt(index: Int) {
+        modCount++
         checkIndex(index)
         System.arraycopy(elements, index + 1, elements, index, size - index - 1)
         size--
@@ -44,6 +49,7 @@ class MyArrayList<T>(initialCapacity: Int = INITIAL_CAPACITY) : MyMutableList<T>
     }
 
     override fun remove(element: T) {
+        modCount++
         for (i in elements.indices) {
             if (elements[i] == element) {
                 removeAt(i)
@@ -58,6 +64,7 @@ class MyArrayList<T>(initialCapacity: Int = INITIAL_CAPACITY) : MyMutableList<T>
     }
 
     override fun clear() {
+        modCount++
         elements = arrayOfNulls(INITIAL_CAPACITY)
         size = 0
     }
@@ -65,6 +72,7 @@ class MyArrayList<T>(initialCapacity: Int = INITIAL_CAPACITY) : MyMutableList<T>
     override fun iterator(): Iterator<T> {
         return object : Iterator<T> {
 
+            private val currentModCount = modCount
             private var nextIndex = 0
 
             override fun hasNext(): Boolean {
@@ -72,6 +80,7 @@ class MyArrayList<T>(initialCapacity: Int = INITIAL_CAPACITY) : MyMutableList<T>
             }
 
             override fun next(): T {
+                if (currentModCount != modCount) throw ConcurrentModificationException()
                 return elements[nextIndex++] as T
             }
         }

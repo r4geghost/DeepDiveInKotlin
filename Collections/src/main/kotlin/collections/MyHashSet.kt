@@ -14,12 +14,15 @@ class MyHashSet<T> : MyMutableSet<T> {
         var next: Node<T>? = null
     )
 
+    private var modCount = 0
+
     private var elements = arrayOfNulls<Node<T>>(INITIAL_CAPACITY)
 
     override var size: Int = 0
         private set
 
     override fun add(element: T): Boolean {
+        modCount++
         if (size >= elements.size * LOAD_FACTOR) {
             increaseArray()
         }
@@ -27,6 +30,7 @@ class MyHashSet<T> : MyMutableSet<T> {
     }
 
     override fun remove(element: T) {
+        modCount++
         val position = getElementPosition(element, elements.size)
         val existing = elements[position] ?: return
 
@@ -49,6 +53,7 @@ class MyHashSet<T> : MyMutableSet<T> {
     }
 
     override fun clear() {
+        modCount++
         elements = arrayOfNulls(INITIAL_CAPACITY)
         size = 0
     }
@@ -56,8 +61,10 @@ class MyHashSet<T> : MyMutableSet<T> {
     override fun iterator(): Iterator<T> {
         return object : Iterator<T> {
 
-            var nextIndex = 0
-            var nodeIndex = 0
+            private val currentModCount = modCount
+
+            private var nextIndex = 0
+            private var nodeIndex = 0
             private var nextNode = elements[nodeIndex]
 
             override fun hasNext(): Boolean {
@@ -65,6 +72,7 @@ class MyHashSet<T> : MyMutableSet<T> {
             }
 
             override fun next(): T {
+                if (currentModCount != modCount) throw ConcurrentModificationException()
                 while (nextNode == null) {
                     nextNode = elements[++nodeIndex]
                 }
@@ -105,6 +113,7 @@ class MyHashSet<T> : MyMutableSet<T> {
     }
 
     private fun add(number: T, array: Array<Node<T>?>): Boolean {
+        modCount++
         val newElement = Node(number)
         val position = getElementPosition(number, array.size)
 
