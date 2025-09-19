@@ -53,6 +53,29 @@ class MyHashSet<T> : MyMutableSet<T> {
         size = 0
     }
 
+    override fun iterator(): Iterator<T> {
+        return object : Iterator<T> {
+
+            var nextIndex = 0
+            var nodeIndex = 0
+            private var nextNode = elements[nodeIndex]
+
+            override fun hasNext(): Boolean {
+                return nextIndex < size
+            }
+
+            override fun next(): T {
+                while (nextNode == null) {
+                    nextNode = elements[++nodeIndex]
+                }
+                return nextNode?.item!!.also {
+                    nextIndex++
+                    nextNode = nextNode?.next
+                }
+            }
+        }
+    }
+
     override fun contains(element: T): Boolean {
         val position = getElementPosition(element, elements.size)
         var existing = elements[position] ?: return false
