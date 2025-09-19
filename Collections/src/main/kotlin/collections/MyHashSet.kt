@@ -2,42 +2,42 @@ package collections
 
 import kotlin.math.abs
 
-class NumbersHashSet : NumbersMutableSet {
+class MyHashSet<T> : MyMutableSet<T> {
 
     companion object {
         private const val INITIAL_CAPACITY = 16
         private const val LOAD_FACTOR = 0.75
     }
 
-    class Node(
-        val item: Int,
-        var next: Node? = null
+    data class Node<T>(
+        val item: T,
+        var next: Node<T>? = null
     )
 
-    private var elements = arrayOfNulls<Node>(INITIAL_CAPACITY)
+    private var elements = arrayOfNulls<Node<T>>(INITIAL_CAPACITY)
 
     override var size: Int = 0
         private set
 
-    override fun add(number: Int): Boolean {
+    override fun add(element: T): Boolean {
         if (size >= elements.size * LOAD_FACTOR) {
             increaseArray()
         }
-        return add(number, elements).also { if (it) size++ }
+        return add(element, elements).also { if (it) size++ }
     }
 
-    override fun remove(number: Int) {
-        val position = getElementPosition(number, elements.size)
+    override fun remove(element: T) {
+        val position = getElementPosition(element, elements.size)
         val existing = elements[position] ?: return
 
-        if (existing.item == number) {
+        if (existing.item == element) {
             elements[position] = existing.next
             size--
             return
         } else {
             var nextElement = existing.next ?: return
             while (true) {
-                if (nextElement.item == number) {
+                if (nextElement.item == element) {
                     existing.next = nextElement.next
                     size--
                     return
@@ -53,24 +53,24 @@ class NumbersHashSet : NumbersMutableSet {
         size = 0
     }
 
-    override fun contains(number: Int): Boolean {
-        val position = getElementPosition(number, elements.size)
-        var element = elements[position] ?: return false
+    override fun contains(element: T): Boolean {
+        val position = getElementPosition(element, elements.size)
+        var existing = elements[position] ?: return false
         while (true) {
-            if (element.item == number) {
+            if (existing.item == element) {
                 return true
             } else {
-                element = element.next ?: return false
+                existing = existing.next ?: return false
             }
         }
     }
 
-    private fun getElementPosition(number: Int, arraySize: Int): Int {
-        return abs(number % arraySize)
+    private fun getElementPosition(element: T, arraySize: Int): Int {
+        return abs(element.hashCode() % arraySize)
     }
 
     private fun increaseArray() {
-        val array = arrayOfNulls<Node>(elements.size * 2)
+        val array = arrayOfNulls<Node<T>>(elements.size * 2)
         for (node in elements) {
             var currentElement = node
             while (currentElement != null) {
@@ -81,7 +81,7 @@ class NumbersHashSet : NumbersMutableSet {
         elements = array
     }
 
-    private fun add(number: Int, array: Array<Node?>): Boolean {
+    private fun add(number: T, array: Array<Node<T>?>): Boolean {
         val newElement = Node(number)
         val position = getElementPosition(number, array.size)
 

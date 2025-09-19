@@ -1,6 +1,6 @@
 package collections
 
-class NumbersArrayList : NumbersMutableList {
+class MyArrayList<T>(initialCapacity: Int = INITIAL_CAPACITY) : MyMutableList<T> {
 
     companion object {
         private const val INITIAL_CAPACITY = 10 // const = не создается get
@@ -8,31 +8,31 @@ class NumbersArrayList : NumbersMutableList {
         // + должны быть привязаны к классу
     }
 
-    private var numbers = arrayOfNulls<Int>(INITIAL_CAPACITY)
+    private var numbers = arrayOfNulls<Any>(INITIAL_CAPACITY)
 
     override var size: Int = 0
         private set
 
-    override fun add(number: Int) {
+    override fun add(element: T) {
         growIfNeeded()
-        numbers[size] = number
+        numbers[size] = element
         size++
     }
 
-    override fun add(index: Int, number: Int) {
+    override fun add(index: Int, element: T) {
         checkIndexForAdding(index)
         growIfNeeded()
         System.arraycopy(numbers, index, numbers, index + 1, size - index)
-        numbers[index] = number
+        numbers[index] = element
         size++
     }
 
-    override fun plus(number: Int) {
-        add(number)
+    override fun plus(element: T) {
+        add(element)
     }
 
-    override fun minus(number: Int) {
-        remove(number)
+    override fun minus(element: T) {
+        remove(element)
     }
 
     override fun removeAt(index: Int) {
@@ -42,18 +42,18 @@ class NumbersArrayList : NumbersMutableList {
         numbers[size] = null
     }
 
-    override fun remove(number: Int) {
+    override fun remove(element: T) {
         for (i in numbers.indices) {
-            if (numbers[i] == number) {
+            if (numbers[i] == element) {
                 removeAt(i)
                 return
             }
         }
     }
 
-    override fun get(index: Int): Int {
+    override fun get(index: Int): T {
         checkIndex(index)
-        return numbers[index]!! // не финальное решение
+        return numbers[index] as T // downcast здесь будет всегда выполняться без ошибки
     }
 
     override fun clear() {
@@ -61,9 +61,9 @@ class NumbersArrayList : NumbersMutableList {
         size = 0
     }
 
-    override fun contains(number: Int): Boolean {
+    override fun contains(element: T): Boolean {
         for (i in numbers.indices) {
-            if (numbers[i] == number) {
+            if (numbers[i] == element) {
                 return true
             }
         }
@@ -72,7 +72,7 @@ class NumbersArrayList : NumbersMutableList {
 
     private fun growIfNeeded() {
         if (numbers.size == size) {
-            val newArray = arrayOfNulls<Int>(size * 2)
+            val newArray = arrayOfNulls<Any>(size * 2)
             System.arraycopy(numbers, 0, newArray, 0, size) // native - реализация на C++ под капотом
             numbers = newArray
         }
