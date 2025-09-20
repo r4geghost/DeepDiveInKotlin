@@ -4,6 +4,8 @@ import kotlin.math.abs
 
 class MyHashMap<K, V> : MyMutableMap<K, V> {
 
+    private var modCount = 0
+
     companion object {
         private const val INITIAL_CAPACITY = 16
         private const val LOAD_FACTOR = 0.75
@@ -43,6 +45,7 @@ class MyHashMap<K, V> : MyMutableMap<K, V> {
     }
 
     override fun put(key: K, value: V): V? {
+        modCount++
         if (size >= elements.size * LOAD_FACTOR) {
             increaseArray()
         }
@@ -50,6 +53,7 @@ class MyHashMap<K, V> : MyMutableMap<K, V> {
     }
 
     override fun remove(key: K): V? {
+        modCount++
         val position = getElementPosition(key, elements.size)
         val existing = elements[position] ?: return null
 
@@ -72,6 +76,7 @@ class MyHashMap<K, V> : MyMutableMap<K, V> {
     }
 
     override fun clear() {
+        modCount++
         elements = arrayOfNulls(INITIAL_CAPACITY)
         size = 0
     }
@@ -95,6 +100,36 @@ class MyHashMap<K, V> : MyMutableMap<K, V> {
             }
         }
         return false
+    }
+
+    fun keyIterator(): MutableIterator<K> {
+        return object : MutableIterator<K> {
+
+            private val currentModCount = modCount
+
+            private var nextIndex = 0
+            private var nodeIndex = 0
+            private var nextNode = elements[nodeIndex]
+
+            override fun hasNext(): Boolean {
+                return nextIndex < size
+            }
+
+            override fun next(): K {
+                if (currentModCount != modCount) throw ConcurrentModificationException()
+                while (nextNode == null) {
+                    nextNode = elements[++nodeIndex]
+                }
+                return nextNode?.key!!.also {
+                    nextIndex++
+                    nextNode = nextNode?.next
+                }
+            }
+
+            override fun remove() {
+                TODO("Not yet implemented")
+            }
+        }
     }
 
     private fun getElementPosition(key: K, arraySize: Int): Int {
