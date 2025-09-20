@@ -1,6 +1,6 @@
 package collections
 
-interface MyMutableSet<T> : MyMutableCollection<T> {
+interface MyMutableSet<T> : MySet<T>, MyMutableCollection<T> {
     override val size: Int
 
     override fun add(element: T): Boolean

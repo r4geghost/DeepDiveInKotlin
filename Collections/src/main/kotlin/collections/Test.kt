@@ -1,9 +1,6 @@
 package collections
 
 fun main() {
-    val numbers = MyHashSet<Int>()
-    repeat(99) {
-        numbers.add(it)
-    }
+    val numbers = myListOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
     numbers.forEach(::println)
 }
