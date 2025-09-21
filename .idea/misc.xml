@@ -7,6 +7,7 @@
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$/Collections" />
+    <file type="web" url="file://$PROJECT_DIR$/Coroutines" />
     <file type="web" url="file://$PROJECT_DIR$/DesignPatterns" />
     <file type="web" url="file://$PROJECT_DIR$/FunctionalProgramming" />
   </component>
