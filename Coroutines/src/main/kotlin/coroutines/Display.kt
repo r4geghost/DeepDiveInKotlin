@@ -8,17 +8,30 @@ import java.awt.Dimension
 import java.awt.Font
 import java.awt.event.WindowAdapter
 import java.awt.event.WindowEvent
+import java.util.concurrent.Executors
 import javax.swing.*
 import kotlin.concurrent.thread
 
 object Display {
 
     // создание скоупа (CoroutineScope - функция, не конструктор)
-    private val scope = CoroutineScope(CoroutineName("My coroutine") + Dispatchers.Unconfined)
+
+    // Dispatchers.Unconfined - не определен поток исполнения, первая запущенная корутина будет выполнена на том потоке,
+    // на котором эту корутину создали - лучше его не использовать
+
+    // Dispatchers.IO - это CachedThreadPool, где кол-во потоков увеличивается при необходимости (макс 64)
+    // используется для загрузки или записи файлов куда-либо - БД и интернет
+
+    // Dispatchers.Main - это SingleThreadExecutor, главный поток для работы с пользовательским интерфейсом (для Android)
+    // Под андройд все ок работает, в Idea будет ошибка
+
+    private val dispatcher = Executors.newSingleThreadExecutor().asCoroutineDispatcher()
+    private val scope = CoroutineScope(CoroutineName("My coroutine") + dispatcher)
 
     private val infoArea = JTextArea().apply {
         font = Font(Font.SANS_SERIF, Font.PLAIN, 16)
         isEditable = false
+        Executors.newSingleThreadExecutor()
     }
 
     private val button = JButton("Load book").apply {
