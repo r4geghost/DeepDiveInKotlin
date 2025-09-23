@@ -14,7 +14,7 @@ import kotlin.concurrent.thread
 object Display {
 
     // создание скоупа (CoroutineScope - функция, не конструктор)
-    private val scope = CoroutineScope(CoroutineName("My coroutine"))
+    private val scope = CoroutineScope(CoroutineName("My coroutine") + Dispatchers.Unconfined)
 
     private val infoArea = JTextArea().apply {
         font = Font(Font.SANS_SERIF, Font.PLAIN, 16)
@@ -82,12 +82,26 @@ object Display {
 
     // suspend - функция, которая может прерваться/приостановиться
     private suspend fun loadBook(): Book {
-        delay(3000)
-        return Book("1984", 1949, "Dystopia")
+        // тело функции вынесено в фоновый поток
+        return withContext(Dispatchers.Default) {
+            longOperation()
+            Book("1984", 1949, "Dystopia")
+        }
     }
 
     private suspend fun loadAuthor(book: Book): Author {
-        delay(3000)
-        return Author("George Orwell", "British writer and journalist")
+        // тело функции вынесено в фоновый поток
+        return withContext(Dispatchers.Default) {
+            longOperation()
+            Author("George Orwell", "British writer and journalist")
+        }
+    }
+
+    private fun longOperation() {
+        mutableListOf<Int>().apply {
+            repeat(300_000) {
+                add(0, it)
+            }
+        }
     }
 }
