@@ -12,7 +12,8 @@ import javax.swing.*
 
 object Display {
 
-    private val dispatcher = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors()).asCoroutineDispatcher()
+    private val dispatcher =
+        Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors()).asCoroutineDispatcher()
     private val scope = CoroutineScope(CoroutineName("My coroutine") + dispatcher)
 
     private val infoArea = JTextArea().apply {
@@ -27,18 +28,22 @@ object Display {
             isEnabled = false
             infoArea.text = "Loading book information...\n"
 
-            // jobs - коллекция корутин
-            val jobs = mutableListOf<Job>()
+            // jobs - коллекция корутин с книгами
+            val jobs = mutableListOf<Deferred<Book>>()
             repeat(10) {
-                // функция launch создает корутину для каждой загрузки книги
-                scope.launch {
+                // функция launch создает корутину, которая не возвращает данные (просто Job)
+
+                // функция async создает корутину, которая вернет данные (класс Deferred<T>)
+                scope.async {
                     val book = loadBook()
                     infoArea.append("Book $it: ${book.title}\nYear: ${book.year}\nGenre: ${book.genre}\n\n")
-                }.also { jobs.add(it) }
+                    book // последняя строчка = возвращаемое значение
+                }.let { jobs.add(it) }
             }
-            // ждем завершения всех корутин из коллекции
+            // ждем завершения всех корутин (с книгами) из коллекции
             scope.launch {
-                jobs.joinAll()
+                val books = jobs.awaitAll()
+                println(books)
                 isEnabled = true
             }
         }
