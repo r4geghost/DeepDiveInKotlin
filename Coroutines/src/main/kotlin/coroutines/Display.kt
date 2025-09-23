@@ -2,16 +2,19 @@ package coroutines
 
 import entities.Author
 import entities.Book
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import java.awt.BorderLayout
 import java.awt.Dimension
 import java.awt.Font
+import java.awt.event.WindowAdapter
+import java.awt.event.WindowEvent
 import javax.swing.*
 import kotlin.concurrent.thread
 
 object Display {
+
+    // создание скоупа (CoroutineScope - функция, не конструктор)
+    private val scope = CoroutineScope(CoroutineName("My coroutine"))
 
     private val infoArea = JTextArea().apply {
         font = Font(Font.SANS_SERIF, Font.PLAIN, 16)
@@ -22,13 +25,15 @@ object Display {
         font = Font(Font.SANS_SERIF, Font.PLAIN, 16)
         addActionListener {
             // функция launch создает корутину (в данном случае, в глобальном скоупе)
-            GlobalScope.launch {
+            scope.launch {
                 isEnabled = false
                 infoArea.text = "Loading book information...\n"
                 val book = loadBook()
+                println("Loaded: $book")
                 infoArea.append("Book: ${book.title}\nYear: ${book.year}\nGenre: ${book.genre}\n")
                 infoArea.append("Loading author information...\n")
                 val author = loadAuthor(book)
+                println("Loaded: $author")
                 infoArea.append("Author: ${author.name}\nBiography: ${author.bio}\n")
                 isEnabled = true
             }
@@ -49,6 +54,12 @@ object Display {
         add(topPanel, BorderLayout.NORTH)
         add(JScrollPane(infoArea), BorderLayout.CENTER)
         size = Dimension(400, 400)
+        // при закрытии окна отменяем работу скоупа
+        addWindowListener(object : WindowAdapter() {
+            override fun windowClosing(e: WindowEvent?) {
+                scope.cancel()
+            }
+        })
     }
 
     fun show() {
