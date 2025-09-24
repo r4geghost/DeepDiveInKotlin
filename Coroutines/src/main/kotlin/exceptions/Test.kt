@@ -8,12 +8,13 @@ private val dispatcher = Executors.newCachedThreadPool().asCoroutineDispatcher()
 private val scope = CoroutineScope(dispatcher)
 
 fun main() {
-    scope.launch {
+    // в launch можно передавать любые составляющие CoroutineContext, в том числе exception handler (НО ТОЛЬКО ДЛЯ РОДИТЕЛЬСКОЙ КОРУТИНЫ, запускаемой у scope)
+    scope.launch(CoroutineExceptionHandler { _, _ -> println("Catch exception!") }) {
         // оборачиваем код ВНУТРИ корутины в try/catch
-        try {
+
+        // в дочерние корутины нельзя передавать exception handler! (работать не будет)
+        launch(Dispatchers.Default) {
             method()
-        } catch (e: Exception) {
-            println("Exception: $e")
         }
 
         // функциональный стиль (под капотом try/catch
