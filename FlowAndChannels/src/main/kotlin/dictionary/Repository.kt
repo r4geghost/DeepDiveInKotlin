@@ -15,7 +15,7 @@ object Repository {
     // игнорируем неизвестные поля в json
     private val json = Json { ignoreUnknownKeys = true }
 
-    suspend fun loadDefinition(word: String): String {
+    suspend fun loadDefinition(word: String): List<String> {
         return withContext(Dispatchers.IO) {
             var connection: HttpURLConnection? = null
             try {
@@ -25,15 +25,19 @@ object Repository {
                 }
                 connection.inputStream.bufferedReader().readText().let {
                     // строка json -> объект класса Definition
-                    json.decodeFromString<Definition>(it).definition
+                    json.decodeFromString<Definition>(it).mapDefinitionToList()
                 }
             } catch (e: Exception) {
                 println("Failed to load definition: ${e.message}")
-                "" // пока так, потом изменим
+                listOf() // пока так, потом изменим
             } finally {
                 // закрываем соединение
                 connection?.disconnect()
             }
         }
+    }
+
+    private fun Definition.mapDefinitionToList(): List<String> {
+        return definition.split(Regex("\\d\\. ")).map { it.trim() }.filter { it.isNotEmpty() }
     }
 }
