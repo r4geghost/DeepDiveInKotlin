@@ -10,7 +10,7 @@ private val dispatcher = Executors.newCachedThreadPool().asCoroutineDispatcher()
 private val scope = CoroutineScope(dispatcher)
 
 fun main() {
-    val timer = Repository.timer
+    val timer = Repository2.timer
     // оба коллектора получают одни и те же эмиты!
     scope.launch {
         timer.collect {
