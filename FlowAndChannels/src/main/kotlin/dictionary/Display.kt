@@ -1,22 +1,22 @@
 package dictionary
 
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.*
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.*
 import java.awt.BorderLayout
 import java.awt.event.KeyAdapter
 import java.awt.event.KeyEvent
 import javax.swing.*
 
+@FlowPreview
 object Display {
 
     private val scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
     private val repository = Repository
-    private lateinit var queries: Flow<String>
+
+    // создаем объект канал, куда корутины могут класть элементы,
+    // и из которого можно забирать элементы через consumeEach {}
+    private val queries = Channel<String>()
 
     private val enterWordLabel = JLabel("Enter word: ")
     private val searchField = JTextField(20).apply {
@@ -58,19 +58,26 @@ object Display {
     // Реактивный стиль
     init {
         // подписываемся на обновление flow
-        queries.onEach {// вызывается на каждый новый элемент
-            searchButton.isEnabled = false
-            resultArea.text = "Loading..."
-        }.map {
-            repository.loadDefinition(it)
-        }.map {
-            it.joinToString("\n\n").ifEmpty { "Not found" }
-        }.onEach {
-            resultArea.text = it
-            searchButton.isEnabled = true
-        }.launchIn(scope) // вызывает collect() внутри указанного scope
+        // (через метод consumeAsFlow() канал преобразуется в объект flow)
+        queries.consumeAsFlow()
+            .debounce(500) // добавляем задержку (если за это время пришел новый элемент, старый отменяется)
+            .onEach {// вызывается на каждый новый элемент
+                searchButton.isEnabled = false
+                resultArea.text = "Loading..."
+            }.map {
+                repository.loadDefinition(it)
+            }.map {
+                it.joinToString("\n\n").ifEmpty { "Not found" }
+            }.onEach {
+                resultArea.text = it
+                searchButton.isEnabled = true
+            }.launchIn(scope) // вызывает collect() внутри указанного scope
     }
 
     private fun loadDefinition() {
+        scope.launch {
+            // при клике на кнопку будем передавать текст в канал
+            queries.send(searchField.text.trim())
+        }
     }
 }
