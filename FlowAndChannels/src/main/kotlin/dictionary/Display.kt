@@ -11,7 +11,16 @@ import javax.swing.*
 @FlowPreview
 object Display {
 
-    private val state = MutableSharedFlow<ScreenState>()
+    /*
+    private val state = MutableSharedFlow<ScreenState>(
+        replay = 1, // показывает, сколько старых эмитов нужно отдавать новым подписчикам
+        extraBufferCapacity = 0, // можно дополнительно расширить буфер (по умолчанию = replay)
+        BufferOverflow.DROP_OLDEST // стратегия при переполнении буфера
+    )
+     */
+
+    // аналогичные настройки сразу указаны в MutableStateFlow (+ нужно передать начальное состояние)
+    private val state = MutableStateFlow<ScreenState>(ScreenState.Initial)
 
     private val scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
     private val repository = Repository
