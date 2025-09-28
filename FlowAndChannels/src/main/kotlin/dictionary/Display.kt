@@ -11,6 +11,8 @@ import javax.swing.*
 @FlowPreview
 object Display {
 
+    private val state = MutableSharedFlow<ScreenState>()
+
     private val scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
     private val repository = Repository
 
@@ -60,18 +62,49 @@ object Display {
         // подписываемся на обновление flow
         // (через метод consumeAsFlow() канал преобразуется в объект flow)
         queries.consumeAsFlow()
-            .debounce(500) // добавляем задержку (если за это время пришел новый элемент, старый отменяется)
+            .debounce(500) // добавляем особую задержку (если за это время пришел новый элемент, старый отменяется)
             .onEach {// вызывается на каждый новый элемент
-                searchButton.isEnabled = false
-                resultArea.text = "Loading..."
+                state.emit(ScreenState.Loading) // эмитим состояние Loading когда пришел новый элемент в поток
             }.map {
-                repository.loadDefinition(it)
-            }.map {
-                it.joinToString("\n\n").ifEmpty { "Not found" }
-            }.onEach {
-                resultArea.text = it
-                searchButton.isEnabled = true
+                if (it.isEmpty()) {
+                    state.emit(ScreenState.Initial)
+                } else {
+                    val result = repository.loadDefinition(it)
+                    if (result.isEmpty()) {
+                        state.emit(ScreenState.NotFound)
+                    } else {
+                        state.emit(ScreenState.DefinitionsLoaded(result))
+                    }
+                }
             }.launchIn(scope) // вызывает collect() внутри указанного scope
+
+        // текущее состояние экрана всегда будет лежать внутри одного объекта mutable shared flow
+        state.onStart {
+            emit(ScreenState.Initial) // эмитим начальное состояние при подписке!
+        }.onEach {
+            when (it) {
+                is ScreenState.DefinitionsLoaded -> {
+                    val definitions = it.definitions.joinToString("\n\n")
+                    resultArea.text = definitions
+                    searchButton.isEnabled = true
+                }
+
+                ScreenState.Initial -> {
+                    resultArea.text = ""
+                    searchButton.isEnabled = false
+                }
+
+                ScreenState.Loading -> {
+                    resultArea.text = "Loading..."
+                    searchButton.isEnabled = false
+                }
+
+                ScreenState.NotFound -> {
+                    resultArea.text = "Not found"
+                    searchButton.isEnabled = true
+                }
+            }
+        }.launchIn(scope)
     }
 
     private fun loadDefinition() {
