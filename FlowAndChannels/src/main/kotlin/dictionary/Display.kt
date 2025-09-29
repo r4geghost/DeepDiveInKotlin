@@ -69,8 +69,8 @@ object Display {
     // Реактивный стиль
     init {
         // подписываемся на обновление flow
-        // (через метод consumeAsFlow() канал преобразуется в объект flow)
-        queries.consumeAsFlow()
+        // заменил consumeAsFlow() на receiveAsFlow() - он канал преобразуется в flow, на который может подписываться много раз
+        queries.receiveAsFlow()
             .debounce(500) // добавляем особую задержку (если за это время пришел новый элемент, старый отменяется)
             .onEach {// вызывается на каждый новый элемент
                 state.emit(ScreenState.Loading) // эмитим состояние Loading когда пришел новый элемент в поток
@@ -85,12 +85,17 @@ object Display {
                         state.emit(ScreenState.DefinitionsLoaded(result))
                     }
                 }
-            }.launchIn(scope) // вызывает collect() внутри указанного scope
+            }
+            // retry под капотом поймает исключение и обработает
+            .retry {// при ошибке переподписываемся на флоу, эмича состояние ошибки
+                println("Exception: $it")
+                state.emit(ScreenState.Exception)
+                true
+            }
+            .launchIn(scope) // вызывает collect() внутри указанного scope
 
         // текущее состояние экрана всегда будет лежать внутри одного объекта mutable shared flow
-        state.onStart {
-            emit(ScreenState.Initial) // эмитим начальное состояние при подписке!
-        }.onEach {
+        state.onEach {
             when (it) {
                 is ScreenState.DefinitionsLoaded -> {
                     val definitions = it.definitions.joinToString("\n\n")
@@ -110,6 +115,11 @@ object Display {
 
                 ScreenState.NotFound -> {
                     resultArea.text = "Not found"
+                    searchButton.isEnabled = true
+                }
+
+                ScreenState.Exception -> {
+                    resultArea.text = "Something went wrong..."
                     searchButton.isEnabled = true
                 }
             }
