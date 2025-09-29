@@ -25,12 +25,17 @@ fun main() {
     sharedFlow.onEach {
         delay(1000)
         println("Shared Flow $it")
-    }.launchIn(scope)
+    }
+        .launchIn(scope)    // во время вызова collect эмиты будут останавливаться до конца обработки элемента
+                            // (т.к. BufferOverflow.SUSPEND и уже есть подписчик consumer!)
+                            // но если бы подписка произошла позже запуска эмитов, ничего бы не было обработано
 
     stateFlow.onEach {
         delay(1000)
         println("State Flow $it")
-    }.launchIn(scope)
+    }
+        .launchIn(scope)    // во время вызова collect эмиты не будут останавливаться,
+                            // т.к. у MutableStateFlow BufferOverflow.DROP_OLDEST (обрабатываются только последние эмиты)
 
     emitFromStandardMethod()
 }
