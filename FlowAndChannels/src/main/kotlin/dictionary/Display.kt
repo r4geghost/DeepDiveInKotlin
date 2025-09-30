@@ -1,7 +1,6 @@
 package dictionary
 
 import kotlinx.coroutines.*
-import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
 import java.awt.BorderLayout
 import java.awt.event.KeyAdapter
@@ -25,9 +24,7 @@ object Display {
     private val scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
     private val repository = Repository
 
-    // создаем объект канал, куда корутины могут класть элементы,
-    // и из которого можно забирать элементы через consumeEach {}
-    private val queries = Channel<String>()
+    private val queries = MutableSharedFlow<String>()
 
     private val enterWordLabel = JLabel("Enter word: ")
     private val searchField = JTextField(20).apply {
@@ -69,9 +66,7 @@ object Display {
     // Реактивный стиль
     init {
         // подписываемся на обновление flow
-        // заменил consumeAsFlow() на receiveAsFlow() - он канал преобразуется в flow, на который может подписываться много раз
-        queries.receiveAsFlow()
-            .debounce(500) // добавляем особую задержку (если за это время пришел новый элемент, старый отменяется)
+        queries.debounce(500) // добавляем особую задержку (если за это время пришел новый элемент, старый отменяется)
             .onEach {// вызывается на каждый новый элемент
                 state.emit(ScreenState.Loading) // эмитим состояние Loading когда пришел новый элемент в поток
             }.map {
@@ -129,7 +124,7 @@ object Display {
     private fun loadDefinition() {
         scope.launch {
             // при клике на кнопку будем передавать текст в канал
-            queries.send(searchField.text.trim())
+            queries.emit(searchField.text.trim())
         }
     }
 }
