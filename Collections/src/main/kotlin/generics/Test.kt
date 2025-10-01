@@ -50,3 +50,5 @@ private fun showCount(workers: MyList<Worker>) {
 open class Worker(val name: String)
 
 class Programmer(name: String) : Worker(name)
+
+class Director(name: String) : Worker(name)
