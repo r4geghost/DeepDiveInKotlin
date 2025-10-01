@@ -1,10 +1,10 @@
 package collections
 
-interface MyMap<K, V> {
+interface MyMap<out K, out V> {
     val size: Int
     val keys: MySet<K>
     val values: MyCollection<V>
-    operator fun get(key: K): V?
-    fun containsKey(key: K): Boolean
-    fun containsValue(value: V): Boolean
+    operator fun get(key: @UnsafeVariance K): V?
+    fun containsKey(key: @UnsafeVariance K): Boolean
+    fun containsValue(value: @UnsafeVariance V): Boolean
 }
