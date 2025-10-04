@@ -12,6 +12,11 @@ fun main() {
     premiumZombie.move()
     premiumZombie.fight()
     premiumZombie.callForHelp()
+
+    val flyingPlayer = FlyingPlayer(human)
+    flyingPlayer.move()
+    flyingPlayer.fight()
+    flyingPlayer.fly()
 }
 
 interface Player {
@@ -51,5 +56,19 @@ data class PremiumPlayer(val player: Player): Player {
 
     fun callForHelp() {
         println("HELP ME!!!")
+    }
+}
+
+data class FlyingPlayer(val player: Player): Player {
+    override fun move() {
+        player.move()
+    }
+
+    override fun fight() {
+        player.fight()
+    }
+
+    fun fly() {
+        println("I'm flying!")
     }
 }
