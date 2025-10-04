@@ -59,14 +59,8 @@ data class PremiumPlayer(val player: Player): Player {
     }
 }
 
-data class FlyingPlayer(val player: Player): Player {
-    override fun move() {
-        player.move()
-    }
-
-    override fun fight() {
-        player.fight()
-    }
+// делегирование реализации интерфейсов - переопределять методы класса Player не нужно - паттерн декоратор
+data class FlyingPlayer(val player: Player): Player by player {
 
     fun fly() {
         println("I'm flying!")
