@@ -1,5 +1,5 @@
 plugins {
-    kotlin("jvm") version "2.0.20"
+    kotlin("jvm")
 }
 
 group = "meekie"
@@ -11,8 +11,6 @@ repositories {
 
 dependencies {
     testImplementation(kotlin("test"))
-    testImplementation("org.junit.jupiter:junit-jupiter-params:5.13.4")
-    implementation(project("Encrypted")) // добавляем модуль
 }
 
 tasks.test {

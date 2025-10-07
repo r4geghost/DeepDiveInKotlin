@@ -1,0 +1,762 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="b4403253-3f46-4b4f-80f7-f5d4b36efe07" name="Changes" comment="9.10 Inner и Nested классы">
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Coroutines/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" afterPath="$PROJECT_DIR$/Coroutines/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Coroutines/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Coroutines/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$/Collections">
+      <ProjectState />
+    </projectState>
+    <projectState path="$PROJECT_DIR$/Coroutines">
+      <ProjectState />
+    </projectState>
+    <projectState path="$PROJECT_DIR$/DesignPatterns">
+      <ProjectState />
+    </projectState>
+    <projectState path="$PROJECT_DIR$/FunctionalProgramming">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$/Collections">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Collections" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Collections" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Collections" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="FunctionalProgramming" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Kotlin Data Class" />
+        <option value="Class" />
+        <option value="Kotlin Interface" />
+        <option value="Kotlin File" />
+        <option value="Kotlin Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;r4geghost&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/r4geghost/DeepDiveInKotlin.git&quot;,
+    &quot;accountId&quot;: &quot;aaab7012-c22e-4e09-a939-1ed7db21be69&quot;
+  }
+}</component>
+  <component name="GradleScriptDefinitionsStorage" workingDir="$PROJECT_DIR$/DesignPatterns" gradleHome="D:\Program\Gradle_USER_HOME\wrapper\dists\gradle-8.14-bin\38aieal9i53h9rfe7vjup95b9\gradle-8.14" javaHome="E:\Programs\SDKs\Java_17" gradleVersion="8.14" />
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="31mVPtjDKAAUpf0MKJ63OoM8bjf" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;Gradle.Build Collections.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Build Coroutines.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Build DesignPatterns.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Build FunctionalProgramming.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Collections [:delegates.GameKt.main()].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Collections [:delegates.HomeworkKt.main()].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Collections [:delegates.LoggingDecoratorKt.main()].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Collections [:delegates.TestKt.main()].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Collections [:inline.TestKt.main()].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Collections [build].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.MyMutableListTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.MyMutableMapTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.MyMutableSetTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.NumbersMutableListTest.When element added to first position then it is in first position.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.NumbersMutableListTest.When get negative element index then throw IndexOutOfBoundsException.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.NumbersMutableListTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.NumbersMutableSetTest.executor&quot;: &quot;Run&quot;,
+    &quot;Kotlin.AlsoFunctionKt.executor&quot;: &quot;Run&quot;,
+    &quot;Kotlin.AnonymousClassesKt.executor&quot;: &quot;Run&quot;,
+    &quot;Kotlin.AnyClassKt.executor&quot;: &quot;Run&quot;,
+    &quot;Kotlin.BuilderPatternKt.executor&quot;: &quot;Run&quot;,
+    &quot;Kotlin.CafeKt.executor&quot;: &quot;Run&quot;,
+    &quot;Kotlin.CorporationKt (1).executor&quot;: &quot;Run&quot;,
+    &quot;Kotlin.CorporationKt.executor&quot;: &quot;Run&quot;,
+    &quot;Kotlin.Crossinline_noinlineKt.executor&quot;: &quot;Run&quot;,
+    &quot;Kotlin.DictionaryKt.executor&quot;: &quot;Run&quot;,
+    &quot;Kotlin.EqualsKt.executor&quot;: &quot;Run&quot;,
+    &quot;Kotlin.ExtentionFunctionsKt.executor&quot;: &quot;Run&quot;,
+    &quot;Kotlin.GenericsKt.executor&quot;: &quot;Run&quot;,
+    &quot;Kotlin.HigherOrderFunctionsKt.executor&quot;: &quot;Run&quot;,
+    &quot;Kotlin.InlineFunctionsKt.executor&quot;: &quot;Run&quot;,
+    &quot;Kotlin.InterfacesKt.executor&quot;: &quot;Run&quot;,
+    &quot;Kotlin.LambdaFunctionsKt.executor&quot;: &quot;Run&quot;,
+    &quot;Kotlin.MainKt.executor&quot;: &quot;Run&quot;,
+    &quot;Kotlin.MethodReferenceKt.executor&quot;: &quot;Run&quot;,
+    &quot;Kotlin.PhoneDictionaryKt.executor&quot;: &quot;Run&quot;,
+    &quot;Kotlin.ProfileKt.executor&quot;: &quot;Run&quot;,
+    &quot;Kotlin.RefactoringUsingApplyKt.executor&quot;: &quot;Run&quot;,
+    &quot;Kotlin.RefactoringUsingWithKt.executor&quot;: &quot;Run&quot;,
+    &quot;Kotlin.StoreKt.executor&quot;: &quot;Run&quot;,
+    &quot;Kotlin.TaskKt.executor&quot;: &quot;Run&quot;,
+    &quot;Kotlin.TestKt (1).executor&quot;: &quot;Run&quot;,
+    &quot;Kotlin.TestKt (2).executor&quot;: &quot;Run&quot;,
+    &quot;Kotlin.TestKt (3).executor&quot;: &quot;Run&quot;,
+    &quot;Kotlin.TestKt (4).executor&quot;: &quot;Run&quot;,
+    &quot;Kotlin.TestKt (5).executor&quot;: &quot;Run&quot;,
+    &quot;Kotlin.TestKt.executor&quot;: &quot;Run&quot;,
+    &quot;Kotlin.TypeErasureKt.executor&quot;: &quot;Run&quot;,
+    &quot;Kotlin.UserManagementKt.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/WorkProjects/Projects/DeepDiveInKotlin/Collections/src/main/kotlin/generics/reifiedAndStarProjection&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.27414903&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;settings.sync&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\WorkProjects\Projects\DeepDiveInKotlin\Collections\src\main\kotlin\generics\reifiedAndStarProjection" />
+      <recent name="E:\WorkProjects\Projects\DeepDiveInKotlin\Coroutines\src\main\kotlin\coroutinesFromCallbacks" />
+      <recent name="E:\WorkProjects\Projects\DeepDiveInKotlin\Coroutines\src\main\kotlin\async" />
+      <recent name="E:\WorkProjects\Projects\DeepDiveInKotlin\Coroutines\src\main\kotlin\concurrency" />
+      <recent name="E:\WorkProjects\Projects\DeepDiveInKotlin\FunctionalProgramming" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\WorkProjects\Projects\DeepDiveInKotlin\FunctionalProgramming\src\main\kotlin\dictionary" />
+      <recent name="E:\WorkProjects\Projects\DeepDiveInKotlin\FunctionalProgramming\src\main\kotlin\products" />
+      <recent name="E:\WorkProjects\Projects\DeepDiveInKotlin\FunctionalProgramming\src\main\kotlin\profile" />
+      <recent name="E:\WorkProjects\Projects\KotlinEdu\src" />
+    </key>
+    <key name="CreateKotlinClassDialog.RecentsKey">
+      <recent name="collections" />
+    </key>
+    <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
+      <recent name="observer" />
+    </key>
+    <key name="CopyKotlinDeclarationDialog.RECENTS_KEY">
+      <recent name="collections" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Kotlin.LoggingDecoratorKt">
+    <configuration name="Collections [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/Collections" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="build" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="GameKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="delegates.GameKt" />
+      <module name="Collections.main" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="HomeworkKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="delegates.HomeworkKt" />
+      <module name="Collections.main" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LoggingDecoratorKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="delegates.LoggingDecoratorKt" />
+      <module name="Collections.main" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestKt (1)" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="delegates.TestKt" />
+      <module name="Collections.main" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Kotlin.LoggingDecoratorKt" />
+        <item itemvalue="Kotlin.GameKt" />
+        <item itemvalue="Kotlin.HomeworkKt" />
+        <item itemvalue="Kotlin.TestKt (1)" />
+        <item itemvalue="Gradle.Collections [build]" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b4403253-3f46-4b4f-80f7-f5d4b36efe07" name="Changes" comment="" />
+      <created>1756129216183</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1756129216183</updated>
+      <workItem from="1756129217215" duration="1143000" />
+      <workItem from="1756232714315" duration="4258000" />
+      <workItem from="1756294433633" duration="959000" />
+      <workItem from="1756296030844" duration="7536000" />
+      <workItem from="1756317506379" duration="554000" />
+      <workItem from="1756460252454" duration="176000" />
+      <workItem from="1756477032028" duration="1596000" />
+      <workItem from="1756580768380" duration="3932000" />
+      <workItem from="1756637856883" duration="1357000" />
+      <workItem from="1756662187342" duration="3918000" />
+      <workItem from="1756809286922" duration="5911000" />
+      <workItem from="1756834333469" duration="759000" />
+      <workItem from="1756835109949" duration="1778000" />
+      <workItem from="1756923482102" duration="1850000" />
+      <workItem from="1756975784132" duration="604000" />
+      <workItem from="1757008514561" duration="4332000" />
+      <workItem from="1757061989801" duration="81000" />
+      <workItem from="1757098013393" duration="2900000" />
+      <workItem from="1757150821122" duration="2332000" />
+      <workItem from="1757183795419" duration="1881000" />
+      <workItem from="1757187047512" duration="2156000" />
+      <workItem from="1757246638445" duration="3119000" />
+      <workItem from="1757253148531" duration="8450000" />
+      <workItem from="1757318361899" duration="867000" />
+      <workItem from="1757335329648" duration="1977000" />
+      <workItem from="1757352911108" duration="675000" />
+      <workItem from="1757407014418" duration="35000" />
+      <workItem from="1757504570661" duration="359000" />
+      <workItem from="1757515060254" duration="1077000" />
+      <workItem from="1757577540366" duration="19000" />
+      <workItem from="1757758260532" duration="1724000" />
+      <workItem from="1757924628371" duration="26000" />
+      <workItem from="1758033071747" duration="9949000" />
+      <workItem from="1758094989431" duration="603000" />
+      <workItem from="1758114786029" duration="2902000" />
+      <workItem from="1758138501999" duration="2090000" />
+      <workItem from="1758193651532" duration="3280000" />
+      <workItem from="1758201088643" duration="6428000" />
+      <workItem from="1758214921864" duration="624000" />
+      <workItem from="1758301554671" duration="6059000" />
+      <workItem from="1758393913352" duration="4539000" />
+      <workItem from="1758625403330" duration="9640000" />
+      <workItem from="1758651384527" duration="229000" />
+      <workItem from="1758700743235" duration="274000" />
+      <workItem from="1758734083297" duration="2376000" />
+      <workItem from="1758736471240" duration="3137000" />
+      <workItem from="1758739618281" duration="6000" />
+      <workItem from="1759247464244" duration="253000" />
+      <workItem from="1759344745626" duration="1896000" />
+      <workItem from="1759353835126" duration="13000" />
+      <workItem from="1759414894862" duration="2943000" />
+    </task>
+    <task id="LOCAL-00055" summary="5.14 Функции With и Apply - домашнее задание">
+      <option name="closed" value="true" />
+      <created>1757259835625</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1757259835625</updated>
+    </task>
+    <task id="LOCAL-00056" summary="5.15 Функция Run и Method reference">
+      <option name="closed" value="true" />
+      <created>1757260609470</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1757260609470</updated>
+    </task>
+    <task id="LOCAL-00057" summary="5.15 Функция Run и Method reference - домашнее задание - условие">
+      <option name="closed" value="true" />
+      <created>1757260619151</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1757260619151</updated>
+    </task>
+    <task id="LOCAL-00058" summary="5.15 Функция Run и Method reference - домашнее задание - выполненное">
+      <option name="closed" value="true" />
+      <created>1757260983035</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1757260983035</updated>
+    </task>
+    <task id="LOCAL-00059" summary="6.2 Singleton. Companion. Init. - домашнее задание - условие">
+      <option name="closed" value="true" />
+      <created>1757353411557</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1757353411557</updated>
+    </task>
+    <task id="LOCAL-00060" summary="6.2 Singleton. Companion. Init. - домашнее задание - выполненное">
+      <option name="closed" value="true" />
+      <created>1757353571495</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1757353571495</updated>
+    </task>
+    <task id="LOCAL-00061" summary="6.6 Observer. Введение - домашнее задание - выполненное">
+      <option name="closed" value="true" />
+      <created>1757504921595</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1757504921595</updated>
+    </task>
+    <task id="LOCAL-00062" summary="6.7 Observer. Зависимость от абстракций">
+      <option name="closed" value="true" />
+      <created>1757516129389</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1757516129389</updated>
+    </task>
+    <task id="LOCAL-00063" summary="6.14 Builder">
+      <option name="closed" value="true" />
+      <created>1757759445638</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1757759445638</updated>
+    </task>
+    <task id="LOCAL-00064" summary="6.14 Builder">
+      <option name="closed" value="true" />
+      <created>1757759455878</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1757759455878</updated>
+    </task>
+    <task id="LOCAL-00065" summary="6.14 Builder - домашнее задание - условие">
+      <option name="closed" value="true" />
+      <created>1757759525898</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1757759525898</updated>
+    </task>
+    <task id="LOCAL-00066" summary="6.14 Builder - домашнее задание - выполненное">
+      <option name="closed" value="true" />
+      <created>1757759876835</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1757759876835</updated>
+    </task>
+    <task id="LOCAL-00067" summary="7.4 ArrayList. Часть 1">
+      <option name="closed" value="true" />
+      <created>1758034863756</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1758034863756</updated>
+    </task>
+    <task id="LOCAL-00068" summary="7.4 ArrayList. Часть 1">
+      <option name="closed" value="true" />
+      <created>1758035307304</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1758035307304</updated>
+    </task>
+    <task id="LOCAL-00069" summary="7.4 ArrayList. Часть 2">
+      <option name="closed" value="true" />
+      <created>1758046166303</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1758046166303</updated>
+    </task>
+    <task id="LOCAL-00070" summary="7.6 ArrayList. Часть 3. Константы и операторы">
+      <option name="closed" value="true" />
+      <created>1758047725442</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1758047725442</updated>
+    </task>
+    <task id="LOCAL-00071" summary="7.8 Тестирование исключений. System.arraycopy">
+      <option name="closed" value="true" />
+      <created>1758116990121</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1758116990122</updated>
+    </task>
+    <task id="LOCAL-00072" summary="7.11 LinkedList. Двусвязный список">
+      <option name="closed" value="true" />
+      <created>1758196497796</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1758196497797</updated>
+    </task>
+    <task id="LOCAL-00073" summary="7.13 HashSet. Реализация. Часть 1">
+      <option name="closed" value="true" />
+      <created>1758202932154</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1758202932154</updated>
+    </task>
+    <task id="LOCAL-00074" summary="7.14 HashSet. Реализация. Часть 2">
+      <option name="closed" value="true" />
+      <created>1758209277582</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1758209277583</updated>
+    </task>
+    <task id="LOCAL-00075" summary="7.16 Параметризируем коллекции">
+      <option name="closed" value="true" />
+      <created>1758302601136</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1758302601136</updated>
+    </task>
+    <task id="LOCAL-00076" summary="7.16 Параметризируем коллекции">
+      <option name="closed" value="true" />
+      <created>1758302650900</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1758302650900</updated>
+    </task>
+    <task id="LOCAL-00077" summary="7.17 Collections и Iterable">
+      <option name="closed" value="true" />
+      <created>1758305496687</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1758305496687</updated>
+    </task>
+    <task id="LOCAL-00078" summary="7.17 Collections и Iterable - myHashSet">
+      <option name="closed" value="true" />
+      <created>1758306059166</created>
+      <option name="number" value="00078" />
+      <option name="presentableId" value="LOCAL-00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1758306059166</updated>
+    </task>
+    <task id="LOCAL-00079" summary="7.18 MutableIterable">
+      <option name="closed" value="true" />
+      <created>1758307018484</created>
+      <option name="number" value="00079" />
+      <option name="presentableId" value="LOCAL-00079" />
+      <option name="project" value="LOCAL" />
+      <updated>1758307018484</updated>
+    </task>
+    <task id="LOCAL-00080" summary="7.21 Неизменяемые коллекции">
+      <option name="closed" value="true" />
+      <created>1758394778098</created>
+      <option name="number" value="00080" />
+      <option name="presentableId" value="LOCAL-00080" />
+      <option name="project" value="LOCAL" />
+      <updated>1758394778098</updated>
+    </task>
+    <task id="LOCAL-00081" summary="7.22 Коллекции Map">
+      <option name="closed" value="true" />
+      <created>1758397020409</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1758397020409</updated>
+    </task>
+    <task id="LOCAL-00082" summary="7.23 Использование Map внутри Set">
+      <option name="closed" value="true" />
+      <created>1758397846622</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1758397846622</updated>
+    </task>
+    <task id="LOCAL-00083" summary="8.7 Structured Concurrency. Часть 1">
+      <option name="closed" value="true" />
+      <created>1758636975362</created>
+      <option name="number" value="00083" />
+      <option name="presentableId" value="LOCAL-00083" />
+      <option name="project" value="LOCAL" />
+      <updated>1758636975362</updated>
+    </task>
+    <task id="LOCAL-00084" summary="8.8 Dispatchers Default и Unconfined">
+      <option name="closed" value="true" />
+      <created>1758637731800</created>
+      <option name="number" value="00084" />
+      <option name="presentableId" value="LOCAL-00084" />
+      <option name="project" value="LOCAL" />
+      <updated>1758637731800</updated>
+    </task>
+    <task id="LOCAL-00085" summary="8.9 Dispatchers IO и Main">
+      <option name="closed" value="true" />
+      <created>1758638154119</created>
+      <option name="number" value="00085" />
+      <option name="presentableId" value="LOCAL-00085" />
+      <option name="project" value="LOCAL" />
+      <updated>1758638154119</updated>
+    </task>
+    <task id="LOCAL-00086" summary="8.10 Job и параллельность">
+      <option name="closed" value="true" />
+      <created>1758639048413</created>
+      <option name="number" value="00086" />
+      <option name="presentableId" value="LOCAL-00086" />
+      <option name="project" value="LOCAL" />
+      <updated>1758639048413</updated>
+    </task>
+    <task id="LOCAL-00087" summary="8.11 Async и Deferred">
+      <option name="closed" value="true" />
+      <created>1758639606254</created>
+      <option name="number" value="00087" />
+      <option name="presentableId" value="LOCAL-00087" />
+      <option name="project" value="LOCAL" />
+      <updated>1758639606254</updated>
+    </task>
+    <task id="LOCAL-00088" summary="8.13 Исключения. Часть 1">
+      <option name="closed" value="true" />
+      <created>1758734996027</created>
+      <option name="number" value="00088" />
+      <option name="presentableId" value="LOCAL-00088" />
+      <option name="project" value="LOCAL" />
+      <updated>1758734996027</updated>
+    </task>
+    <task id="LOCAL-00089" summary="8.14 Исключения. Часть 2. Async">
+      <option name="closed" value="true" />
+      <created>1758736862889</created>
+      <option name="number" value="00089" />
+      <option name="presentableId" value="LOCAL-00089" />
+      <option name="project" value="LOCAL" />
+      <updated>1758736862889</updated>
+    </task>
+    <task id="LOCAL-00090" summary="8.15 Отмена корутин">
+      <option name="closed" value="true" />
+      <created>1758738118412</created>
+      <option name="number" value="00090" />
+      <option name="presentableId" value="LOCAL-00090" />
+      <option name="project" value="LOCAL" />
+      <updated>1758738118412</updated>
+    </task>
+    <task id="LOCAL-00091" summary="8.16 Suspend Coroutine">
+      <option name="closed" value="true" />
+      <created>1758739158645</created>
+      <option name="number" value="00091" />
+      <option name="presentableId" value="LOCAL-00091" />
+      <option name="project" value="LOCAL" />
+      <updated>1758739158645</updated>
+    </task>
+    <task id="LOCAL-00092" summary="8.17 SupervisorJob">
+      <option name="closed" value="true" />
+      <created>1758739601391</created>
+      <option name="number" value="00092" />
+      <option name="presentableId" value="LOCAL-00092" />
+      <option name="project" value="LOCAL" />
+      <updated>1758739601391</updated>
+    </task>
+    <task id="LOCAL-00093" summary="9.3 Стирание типов">
+      <option name="closed" value="true" />
+      <created>1759345349793</created>
+      <option name="number" value="00093" />
+      <option name="presentableId" value="LOCAL-00093" />
+      <option name="project" value="LOCAL" />
+      <updated>1759345349793</updated>
+    </task>
+    <task id="LOCAL-00094" summary="9.4 Reified и Star Projection">
+      <option name="closed" value="true" />
+      <created>1759346620527</created>
+      <option name="number" value="00094" />
+      <option name="presentableId" value="LOCAL-00094" />
+      <option name="project" value="LOCAL" />
+      <updated>1759346620527</updated>
+    </task>
+    <task id="LOCAL-00095" summary="9.5 Inline и Non local return">
+      <option name="closed" value="true" />
+      <created>1759416376593</created>
+      <option name="number" value="00095" />
+      <option name="presentableId" value="LOCAL-00095" />
+      <option name="project" value="LOCAL" />
+      <updated>1759416376593</updated>
+    </task>
+    <task id="LOCAL-00096" summary="9.5 Inline и Non local return">
+      <option name="closed" value="true" />
+      <created>1759416550224</created>
+      <option name="number" value="00096" />
+      <option name="presentableId" value="LOCAL-00096" />
+      <option name="project" value="LOCAL" />
+      <updated>1759416550225</updated>
+    </task>
+    <task id="LOCAL-00097" summary="9.6 Crossinline и noinline">
+      <option name="closed" value="true" />
+      <created>1759417387524</created>
+      <option name="number" value="00097" />
+      <option name="presentableId" value="LOCAL-00097" />
+      <option name="project" value="LOCAL" />
+      <updated>1759417387524</updated>
+    </task>
+    <task id="LOCAL-00098" summary="9.8 Делегирование свойств">
+      <option name="closed" value="true" />
+      <created>1759502291750</created>
+      <option name="number" value="00098" />
+      <option name="presentableId" value="LOCAL-00098" />
+      <option name="project" value="LOCAL" />
+      <updated>1759502291751</updated>
+    </task>
+    <task id="LOCAL-00099" summary="9.9 Делегирование реализации интерфейсов">
+      <option name="closed" value="true" />
+      <created>1759577863520</created>
+      <option name="number" value="00099" />
+      <option name="presentableId" value="LOCAL-00099" />
+      <option name="project" value="LOCAL" />
+      <updated>1759577863520</updated>
+    </task>
+    <task id="LOCAL-00100" summary="9.9 Делегирование реализации интерфейсов - домашнее задание">
+      <option name="closed" value="true" />
+      <created>1759578342205</created>
+      <option name="number" value="00100" />
+      <option name="presentableId" value="LOCAL-00100" />
+      <option name="project" value="LOCAL" />
+      <updated>1759578342205</updated>
+    </task>
+    <task id="LOCAL-00101" summary="9.9 Делегирование реализации интерфейсов - паттерн декоратор">
+      <option name="closed" value="true" />
+      <created>1759578558184</created>
+      <option name="number" value="00101" />
+      <option name="presentableId" value="LOCAL-00101" />
+      <option name="project" value="LOCAL" />
+      <updated>1759578558184</updated>
+    </task>
+    <task id="LOCAL-00102" summary="9.9 Делегирование реализации интерфейсов - паттерн декоратор - домашнее задание">
+      <option name="closed" value="true" />
+      <created>1759579549692</created>
+      <option name="number" value="00102" />
+      <option name="presentableId" value="LOCAL-00102" />
+      <option name="project" value="LOCAL" />
+      <updated>1759579549692</updated>
+    </task>
+    <task id="LOCAL-00103" summary="9.10 Inner и Nested классы">
+      <option name="closed" value="true" />
+      <created>1759580145650</created>
+      <option name="number" value="00103" />
+      <option name="presentableId" value="LOCAL-00103" />
+      <option name="project" value="LOCAL" />
+      <updated>1759580145650</updated>
+    </task>
+    <option name="localTasksCounter" value="104" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="7.18 MutableIterable" />
+    <MESSAGE value="7.21 Неизменяемые коллекции" />
+    <MESSAGE value="7.22 Коллекции Map" />
+    <MESSAGE value="7.23 Использование Map внутри Set" />
+    <MESSAGE value="8.7 Structured Concurrency. Часть 1" />
+    <MESSAGE value="8.8 Dispatchers Default и Unconfined" />
+    <MESSAGE value="8.9 Dispatchers IO и Main" />
+    <MESSAGE value="8.10 Job и параллельность" />
+    <MESSAGE value="8.11 Async и Deferred" />
+    <MESSAGE value="8.13 Исключения. Часть 1" />
+    <MESSAGE value="8.14 Исключения. Часть 2. Async" />
+    <MESSAGE value="8.15 Отмена корутин" />
+    <MESSAGE value="8.16 Suspend Coroutine" />
+    <MESSAGE value="8.17 SupervisorJob" />
+    <MESSAGE value="9.3 Стирание типов" />
+    <MESSAGE value="9.4 Reified и Star Projection" />
+    <MESSAGE value="9.5 Inline и Non local return" />
+    <MESSAGE value="9.6 Crossinline и noinline" />
+    <MESSAGE value="9.8 Делегирование свойств" />
+    <MESSAGE value="9.8 Делегирование свойств - домашнее задание - собственная реализация делегата observable" />
+    <MESSAGE value="9.9 Делегирование реализации интерфейсов" />
+    <MESSAGE value="9.9 Делегирование реализации интерфейсов - домашнее задание" />
+    <MESSAGE value="9.9 Делегирование реализации интерфейсов - паттерн декоратор" />
+    <MESSAGE value="9.9 Делегирование реализации интерфейсов - паттерн декоратор - домашнее задание" />
+    <MESSAGE value="9.10 Inner и Nested классы" />
+    <option name="LAST_COMMIT_MESSAGE" value="9.10 Inner и Nested классы" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>
