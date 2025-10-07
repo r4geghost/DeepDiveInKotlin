@@ -19,14 +19,19 @@ fun main() {
 }
 
 /*
-    Container<in T> означает, что передать мы можем либо Container<T>, либо Container<Родитель типа T>
-    = контравариантность (producer - можно считывать данные, но изменять нельзя)
+    Container<out T> (ковариантность)
+    ├─ Передать: Container<T> или Container<РОДИТЕЛЬ T>
+    ├─ PRODUCER: можем ЧИТАТЬ, нельзя ПИСАТЬ
+    └─ Пример: List<out Animal> может быть List<Any>
 
-    Container<out T> означает, что передать мы можем либо Container<T>, либо Container<Наследник типа T>
-    = ковариантность (consumer - записывать данные можно, а считывать нельзя)
+    Container<in T> (контравариантность)
+    ├─ Передать: Container<T> или Container<НАСЛЕДНИК T>
+    ├─ CONSUMER: можем ПИСАТЬ, нельзя ЧИТАТЬ
+    └─ Пример: Comparable<in String> может быть Comparable<CharSequence>
 
-    Container<T> означает, что передать мы можем только Container<T>
-    = инвариантность
+    Container<T> (инвариантность)
+    ├─ Передать: только Container<T>
+    └─ Можно и читать, и писать
  */
 private fun <T> copy(src: Container<out T>, dst: Container<in T>) {
     dst.value = src.value
